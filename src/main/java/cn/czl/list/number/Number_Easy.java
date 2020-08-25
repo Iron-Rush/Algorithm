@@ -1,8 +1,12 @@
-package org.lanqiao.study.number;
+package cn.czl.list.number;
 
 import org.junit.jupiter.api.Test;
 
-public class NumberEasy {
+/**
+ * @author RedRush
+ * @date 2020/8/25 11:43
+ */
+public class Number_Easy {
     @Test
     public void testSolution(){
 //        System.out.println(subtractProductAndSum(234));
@@ -11,16 +15,16 @@ public class NumberEasy {
     }
 
     public int subtractProductAndSum(int n) {
-       int product = 1,sum = 0;
-       while (n >= 1){
-           int temp = n % 10;
-           sum += temp;
-           product *= temp;
-           System.out.println("product=" + product);
-           System.out.println("sum=" + sum);
-           n = n/10;
-       }
-       return  product - sum;
+        int product = 1,sum = 0;
+        while (n >= 1){
+            int temp = n % 10;
+            sum += temp;
+            product *= temp;
+            System.out.println("product=" + product);
+            System.out.println("sum=" + sum);
+            n = n/10;
+        }
+        return  product - sum;
     }
 
     public int findSpecialInteger(int[] arr) {
