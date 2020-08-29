@@ -17,8 +17,6 @@ public class RomanToInt_Easy {
 
     @Test
     public void testSolution(){
-//        System.out.println(ROMANSTR.charAt(6));
-//        System.out.println(ROMANSTR.length());
         System.out.println("Trans result:" + romanToInt3(ROMANSTR));
     }
     /**
