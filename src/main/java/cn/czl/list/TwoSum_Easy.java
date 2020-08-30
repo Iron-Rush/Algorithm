@@ -11,12 +11,12 @@ import java.util.HashMap;
 public class TwoSum_Easy {
 
 //    private static int[] NUMS = {1,2,3,5,6,100,200};
-private static int[] NUMS = {18,19,25,30,39,41,61,77,88,97};
+    private static int[] NUMS = {18,19,25,30,39,41,61,77,88,97};
     private static int RESULT = 59;
 
     @Test
     public void TestSolution(){
-        int[] res = twoSum(NUMS, RESULT);
+        int[] res = twoSum2(NUMS, RESULT);
         for (int temp : res) {
             System.out.println(temp);
         }
@@ -43,12 +43,34 @@ private static int[] NUMS = {18,19,25,30,39,41,61,77,88,97};
     }
 
     /**
+     * 双指针优化版
+     * 执行用时：1 ms, 在所有 Java 提交中击败了99.68%的用户
+     * 内存消耗：57.1 MB, 在所有 Java 提交中击败了41.63%的用户
+     * */
+    public int[] twoSum2(int[] nums, int target){
+        int Lpos = 0;
+        int Rpos = nums.length-1;
+        while (Lpos < Rpos){
+            while (nums[Lpos] + nums[Rpos] > target){
+                Rpos --;
+            }
+            while (nums[Lpos] + nums[Rpos] < target){
+                Lpos ++;
+            }
+            if (nums[Lpos] + nums[Rpos] == target){
+                return new int[] {nums[Lpos], nums[Rpos]};
+            }
+        }
+        return new int[0];
+    }
+
+    /**
      * 将已遍历元素元素的补数，作为键存入Map，值为该元素下标
      * 每次先去Map中查看，当前数字是否为之前数的补数
      * 执行用时：56 ms, 在所有 Java 提交中击败了13.80%的用户
      * 内存消耗：59.6 MB, 在所有 Java 提交中击败了5.03%的用户
      * */
-    public int[] twoSum2(int[] nums, int target) {
+    public int[] twoSum3(int[] nums, int target) {
         int[] res = new int[2];
         HashMap<Integer,Integer> map = new HashMap();
         map.put(target - nums[0],0);
@@ -60,4 +82,8 @@ private static int[] NUMS = {18,19,25,30,39,41,61,77,88,97};
         }
         return res;
     }
+
+
+
+
 }
