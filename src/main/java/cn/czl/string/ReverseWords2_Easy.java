@@ -12,16 +12,30 @@ import org.junit.jupiter.api.Test;
  */
 public class ReverseWords2_Easy {
 
-    private static String STR = "";
+    private static String STR = "abcdefg";
 
     @Test
     public void testSolution(){
-        System.out.println();
+        System.out.println(reverseStr(STR, 2));
     }
 
     public String reverseStr(String s, int k) {
-        StringBuilder sb = new StringBuilder(s);
-
+        StringBuilder sb = new StringBuilder();
+        boolean flag = false;
+        for (int i = 0; i < s.length();) {
+            StringBuilder sbTemp = new StringBuilder();
+            int limit = i + k;
+            for (int j = i; j < limit && j < s.length(); j++){
+                sbTemp.append(s.charAt(j));
+                flag = !flag;
+                i = j;
+            }
+            if (flag){
+                sb.append(sbTemp.reverse());
+            }else {
+                sb.append(sbTemp);
+            }
+        }
         return sb.toString();
     }
 
