@@ -19,11 +19,17 @@ public class TestJsonToSet {
     public static void main(String[] args) {
         Map<String, Object> paramValues = JSONObject.parseObject(JSONSTR);
         System.out.println("paramValues : " + paramValues);
+        /**
+         * 获取keySet，通过遍历全部key，进而遍历全部值。
+         * */
 //        for (String paramKey : paramValues.keySet()){
 //            if ("startDate".equals(paramKey)){
 //                System.out.println("paramVlue = " + paramValues.get(paramKey));
 //            }
 //        }
+        /**
+         * Entry遍历map，效率较高
+         */
         for (Map.Entry<String, Object> paramInfo : paramValues.entrySet()){
             if ("startDate" == paramInfo.getKey()){
                 System.out.println(paramInfo.getValue());

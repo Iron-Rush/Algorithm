@@ -101,7 +101,7 @@ public class VisitAllRoom_Normal {
     }
 
     /**
-     * 标准深度搜索(dfs)
+     * 标准深度优先搜索(dfs)
      * */
     boolean[] UnlockMark;
     int UnlockNumber;
@@ -123,7 +123,7 @@ public class VisitAllRoom_Normal {
         }
     }
     /**
-     * 标准广度优先搜索
+     * 标准广度优先搜索(bfs)
      * */
     public boolean canVisitAllRooms4(List<List<Integer>> rooms) {
         int n = rooms.size(), num = 0;

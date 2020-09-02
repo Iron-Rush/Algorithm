@@ -1,4 +1,4 @@
-package cn.czl.treeNode;
+package cn.czl.node.treenode;
 
 import java.util.ArrayList;
 import java.util.List;
