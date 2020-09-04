@@ -1,20 +1,44 @@
 package cn.czl.search.dfs;
 
+import cn.czl.node.treenode.TraverseTreeNode_DFS_Demo;
+
+import java.util.Stack;
+
 /**
  * @author RedRush
  * @date 2020/9/4 11:20
  * @description: 二叉树的深度优先搜索代码如下
  */
 public class BinaryTreeNode_DFS_Demo {
-    public void treeDFS(TreeNode root) {
+    /**
+     * 递归实现DFS
+     * */
+    public void treeDFS_Recur(TreeNode root) {
         //当前节点为空直接返回
         if (root == null)
             return;
         //打印当前节点的值
         System.out.println(root.val);
         //然后递归遍历左右子节点
-        treeDFS(root.left);
-        treeDFS(root.right);
+        treeDFS_Recur(root.left);
+        treeDFS_Recur(root.right);
+    }
+    /**
+     * 循环实现DFS
+     * */
+    public static void treeDFS_Loop(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        stack.add(root);
+        while (!stack.empty()) {
+            TreeNode node = stack.pop();
+            System.out.println(node.val);
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+        }
     }
 
     /**

@@ -10,7 +10,7 @@ import java.util.Queue;
  */
 public class TraverseTreeNode_BFS_Demo {
 
-    public static void levelOrder(TreeNode tree) {
+    public static void treeBFS(TreeNode tree) {
         if (tree == null)
             return;
         Queue<TreeNode> queue = new LinkedList<>();
