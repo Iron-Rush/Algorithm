@@ -86,9 +86,9 @@ public class IsPalindrome_Easy {
             return false;
         }
         int revertedNumber = 0;
-        while (x > revertedNumber) {
-            revertedNumber = revertedNumber * 10 + x % 10;
-            x /= 10;
+        while ( x > revertedNumber){    // 新建revertedNumber，用于记录后半截数字反转后的结果
+            revertedNumber = revertedNumber * 10 + x % 10;  // 将传入数字末尾取出，将已累加数字X10，腾出个位
+            x /= 10;        // 缩短原数,除去尾部
         }
         /**
          * 当数字长度为奇数时，我们可以通过 revertedNumber/10 去除处于中位的数字。
