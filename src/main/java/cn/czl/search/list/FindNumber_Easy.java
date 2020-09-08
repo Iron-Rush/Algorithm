@@ -9,7 +9,7 @@ import java.util.*;
  * @date 2020/9/3 17:16
  * @description:
  */
-public class FindNumber {
+public class FindNumber_Easy {
 
     private int[] nums = {2, 3, 1, 0, 2, 5, 3};
 
