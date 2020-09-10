@@ -8,6 +8,11 @@ import java.util.List;
  * @author RedRush
  * @date 2020/9/9 11:29
  * @description:
+ *      39.组合总和
+ *      给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+ *      candidates 中的数字可以无限制重复被选取。
+ *      输入：candidates = [2,3,6,7], target = 7,
+ *      所求解集为：[[7],[2,2,3]]
  */
 public class CombinationSum_Normal {
     /**
