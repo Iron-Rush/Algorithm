@@ -22,7 +22,7 @@ public class CombinationSum2_Normal {
 
     @Test
     public void TestSolution(){
-    System.out.println(combinationSum2(nums, target));
+    System.out.println(combinationSum2_2(nums, target));
     }
 
     /**
@@ -39,7 +39,7 @@ public class CombinationSum2_Normal {
         depthFirstSearch(keys, candidates, target);
         return resList;
     }
-    public void depthFirstSearch(Boolean[] keys, int[] nums, int target){
+    private void depthFirstSearch(Boolean[] keys, int[] nums, int target){
         for (int i = 0; i < keys.length; i++) {
             if (target == 0){
                 if (!resList.contains(tempList)){
@@ -54,6 +54,36 @@ public class CombinationSum2_Normal {
                 tempList.remove(tempList.size() - 1);
             }else {
                 break;
+            }
+        }
+    }
+
+    /**
+     * 递归实现dfs(逻辑优化)
+     * 执行用时：2 ms, 在所有 Java 提交中击败了99.94%的用户
+     * 内存消耗：40.1 MB, 在所有 Java 提交中击败了36.25%的用户
+     * */
+//    private List<List<Integer>> resList = new ArrayList<List<Integer>>();
+//    private List<Integer> tempList = new ArrayList<Integer>();
+    public List<List<Integer>> combinationSum2_2(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        depthFirstSearch(0, candidates, target);
+        return resList;
+    }
+    private void depthFirstSearch(int pos, int[] nums, int target){
+        if (target == 0){
+            resList.add(new ArrayList<>(tempList));
+        }
+        for(int i = pos; i < nums.length; i++){
+            if(nums[i] > target){
+                break;
+            }
+            tempList.add(nums[i]);
+            depthFirstSearch(i+1, nums, target-nums[i]);
+            tempList.remove(tempList.size()-1);
+            // 向后去重，以避免相通数组出现。因为递归后去重，所以不会影响[1,2,2]的计算
+            while(i+1 < nums.length && nums[i] == nums[i+1]){
+                i++;
             }
         }
     }
