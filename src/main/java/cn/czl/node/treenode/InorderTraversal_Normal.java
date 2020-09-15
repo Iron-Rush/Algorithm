@@ -36,7 +36,7 @@ public class InorderTraversal_Normal {
         p.left.right = new TreeNode(5);
         p.right.right = new TreeNode(6);
 
-        List<Integer> list = inorderTraversal2(p);
+        List<Integer> list = inorderTraversalDemo(p);
         for (int i = 0; i < list.size(); i++)
         {
             System.out.print(list.get(i) + " ");
@@ -78,6 +78,40 @@ public class InorderTraversal_Normal {
         }
         return res;
     }
+
+    /**
+     * 中序遍历-迭代法实现(模版)
+     * */
+    public List<Integer> inorderTraversalDemo(TreeNode root){
+        List<Integer> res = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        if (root != null){
+            stack.push(root);
+        }
+        while (!stack.isEmpty()){
+//            TreeNode tempNode = stack.peek();
+            TreeNode tempNode = stack.pop();
+            if (tempNode != null){
+//                stack.pop();        // 将该节点弹出，避免重复操作，下面再将右中左节点添加到栈中
+                if (tempNode.right != null){    // 添加右节点
+                    stack.push(tempNode.right);
+                }
+                stack.push(tempNode);          // 添加中节点
+                stack.push(null);        // 中节点访问过，但未处理，做标记(单独添加中间节点，通过null识别)
+                if (tempNode.left != null){    // 添加左节点
+                    stack.push(tempNode.left);
+                }
+            }else {
+//                stack.pop();                   // 弹出空节点
+                tempNode = stack.pop();        // 重新取出栈中元素
+//                tempNode = stack.peek();
+//                stack.pop();
+                res.add(tempNode.val);         // 加入到数组
+            }
+        }
+        return res;
+    }
+
 
     /**
      * 中序遍历-Morris遍历算法
