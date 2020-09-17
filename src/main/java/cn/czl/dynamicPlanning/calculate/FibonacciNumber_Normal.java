@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
  *          - 输入：4  - 输出：3
  *          - 解释：F(4) = F(3) + F(2) = 2 + 1 = 3.
  */
-public class FibonacciNumber_Easy {
+public class FibonacciNumber_Normal {
 
     private static int N = 4;
 
