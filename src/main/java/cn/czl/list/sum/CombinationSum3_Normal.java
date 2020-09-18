@@ -1,4 +1,4 @@
-package cn.czl.list;
+package cn.czl.list.sum;
 
 import org.junit.jupiter.api.Test;
 

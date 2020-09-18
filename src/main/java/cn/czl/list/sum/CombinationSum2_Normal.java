@@ -1,4 +1,4 @@
-package cn.czl.list;
+package cn.czl.list.sum;
 
 import org.junit.jupiter.api.Test;
 
@@ -81,7 +81,7 @@ public class CombinationSum2_Normal {
             tempList.add(nums[i]);
             depthFirstSearch(i+1, nums, target-nums[i]);
             tempList.remove(tempList.size()-1);
-            // 向后去重，以避免相通数组出现。因为递归后去重，所以不会影响[1,2,2]的计算
+            // 向后去重，以避免相同数组出现。因为递归后去重，所以不会影响[1,2,2]的计算
             while(i+1 < nums.length && nums[i] == nums[i+1]){
                 i++;
             }

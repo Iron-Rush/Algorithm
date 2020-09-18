@@ -2,6 +2,7 @@ package cn.czl.dynamicPlanning.calculate;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -31,20 +32,21 @@ public class CoinChange_Easy {
      * ===超时===
      * */
     public int coinChange(int[] coins, int amount) {
-        if (amount == 0){
+        if (amount == 0){   // 递归基本情况
             return 0;
         }
-        if (amount < 0){
+        if (amount < 0){    // 特殊情况(无解)
             return -1;
         }
+        // 初始化对比结果的值为极大值，用于与其他计算结果比较，取最小值
         int res = Integer.MAX_VALUE;
-        for (int coin : coins) {
+        for (int coin : coins) {    // 遍历货币数组，对每个货币进行递归深挖
             int count = coinChange(coins, amount - coin);
-            // 子问题无解，则跳过
+            // 若子问题无解，则跳过
             if(count == -1){
                 continue;
             }
-            res = Math.min(res, 1 + count);
+            res = Math.min(res, 1 + count); // 对比计算结果，取更优解
         }
         return ((res == Integer.MAX_VALUE)? -1: res);
     }
@@ -56,25 +58,53 @@ public class CoinChange_Easy {
      * */
     private HashMap<Integer, Integer> saveMap = new HashMap();
     public int coinChange2(int[] coins, int amount) {
+        // 查看是否存在已计算过的对应值
         if (saveMap.containsKey(amount)){
             return saveMap.get(amount);
         }
-        if (amount == 0){
+        if (amount == 0){   // 递归基本情况
             return 0;
         }
-        if (amount < 0){
+        if (amount < 0){    // 特殊情况(无解)
             return -1;
         }
+        // 初始化对比结果的值为极大值，用于与其他计算结果比较，取最小值
         int res = Integer.MAX_VALUE;
-        for (int coin: coins) {
+        for (int coin: coins) { // 遍历货币数组，对每个货币进行递归深挖
             int count = coinChange(coins, amount - coin);
-            if (count == -1){
+            if (count == -1){   // 若子问题无解，则跳过
                 continue;
             }
-            res = Math.min(res, 1 + count);
+            res = Math.min(res, 1 + count); // 对比计算结果，取更优解
         }
+        // 验证本次计算是否有效，有效则存入备忘录
         saveMap.put(amount, (res == Integer.MAX_VALUE? -1: res));
         return saveMap.get(amount);
     }
 
+    /**
+     * dp数组迭代法
+     * 执行用时：13 ms, 在所有 Java 提交中击败了91.18%的用户
+     * 内存消耗：38.4 MB, 在所有 Java 提交中击败了74.56%的用户
+     * */
+    public int coinChange3(int[] coins, int amount) {
+        // 初始化dp数组，大小为amount+1
+        int[] dp = new int[amount+1];
+        Arrays.fill(dp, amount + 1);
+        dp[0] = 0;
+        // 从零计算出0-amount的全部最优解。i即为当前的amount
+        for (int i = 0; i < dp.length; i++) {
+            for (int coin : coins) {
+                if (i < coin){  // 子问题无解，跳过
+                    continue;
+                }
+                // 当前位置最优解
+                // 即当前位置解 与 当前货币值的货币缺口对应的最优解
+                // 中的最小值
+                dp[i] = Math.min(dp[i], 1 + dp[i - coin]);
+            }
+        }
+        // 判断当前解是否有效
+        return (dp[amount] == amount+1) ? -1 : dp[amount];
+    }
 }
