@@ -2,6 +2,9 @@ package cn.czl.dynamicPlanning.backpack;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * @author RedRush
  * @date 2020/9/18 23:52
@@ -22,12 +25,15 @@ public class Backpack01_Classic {
     private static int[] wt = new int[]{2,1,3};
     private static int[] val = new int[]{4,2,3};
 
-
     @Test
     public void TestSolution(){
         System.out.println(backpack01(4,3,wt,val));
+        System.out.println(backpack01_Reduce(4,3,wt,val));
     }
-
+    /**
+     * dp二维数组
+     * 判断当前物品，装/不装进背包
+     * */
     public int backpack01(int weight, int n, int[] wt, int[] val){
         int[][] dp = new int[n+1][weight+1];    // 从背包容量为0开始，向上层递推最优解
         for (int i = 1; i <= n; i++) {          // 背包物品容量递推层
@@ -42,5 +48,19 @@ public class Backpack01_Classic {
         }
         return dp[n][weight];
     }
-
+    /**
+     * dp状态压缩：一维数组
+     * */
+    public int backpack01_Reduce(int weight, int n, int[] wt, int[] val){
+        int[] dp = new int [weight + 1];    // 缓存当前状态数组(否则循环运算时，会读取到本次循环的值)
+        for (int i = 1; i <= n; i++){
+            int[] preList = Arrays.copyOf(dp, weight+1);
+            for (int w = 1; w <= weight; w++) {
+                if (w >= wt[i-1]){
+                    dp[w] = Math.max(preList[w - wt[i-1]] + val[i-1], preList[w]);
+                }
+            }
+        }
+        return dp[weight];
+    }
 }
