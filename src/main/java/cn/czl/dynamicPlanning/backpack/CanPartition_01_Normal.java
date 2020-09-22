@@ -2,6 +2,10 @@ package cn.czl.dynamicPlanning.backpack;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Hashtable;
+
 /**
  * @author RedRush
  * @date 2020/9/20 17:32
@@ -33,8 +37,20 @@ public class CanPartition_01_Normal {
             return false;
         }
         int len = nums.length;
-        boolean[][] dp = new boolean[len][sum/2];
-
-        return dp[len-1][len-1];
+        sum = sum/2;
+        boolean[][] dp = new boolean[len+1][sum+1];
+        for (int i = 0; i <= len ; i++) {
+            dp[i][0] = true;
+        }
+        for (int i = 1; i <= len; i++) {
+            for (int j = 1; j <= sum; j++) {
+                if (j-nums[i-1] < 0){
+                    dp[i][j] = dp[i-1][j];  // 如果装不下当前数，则保存前一个容量的值
+                }else {
+                    dp[i][j] = dp[i-1][j] || dp[i-1][j-nums[i-1]];
+                }
+            }
+        }
+        return dp[len][sum];
     }
 }
