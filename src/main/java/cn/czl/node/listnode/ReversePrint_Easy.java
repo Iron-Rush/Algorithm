@@ -1,8 +1,5 @@
 package cn.czl.node.listnode;
 
-import cn.czl.node.treenode.TraverseTreeNode_DFS_Demo;
-
-import javax.swing.tree.TreeNode;
 import java.util.Stack;
 
 /**

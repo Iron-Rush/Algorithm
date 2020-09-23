@@ -1,4 +1,4 @@
-package cn.czl.node.treenode;
+package cn.czl.node.treenode.demo;
 
 import java.util.LinkedList;
 import java.util.Queue;
