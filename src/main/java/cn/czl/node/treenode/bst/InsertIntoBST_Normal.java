@@ -1,7 +1,6 @@
 package cn.czl.node.treenode.bst;
 
 import org.junit.jupiter.api.Test;
-import sun.reflect.generics.tree.Tree;
 
 /**
  * @author RedRush
