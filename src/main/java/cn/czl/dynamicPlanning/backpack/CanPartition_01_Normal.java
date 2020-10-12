@@ -20,7 +20,8 @@ import java.util.*;
  */
 public class CanPartition_01_Normal {
 
-    private static int[] NUMS = new int[]{1,5,11,5};
+//    private static int[] NUMS = new int[]{1,5,11,5};
+    private static int[] NUMS = new int[]{23,13,11,7,6,5,5};
     @Test
     public void TestSolution(){
         System.out.println(canPartition4(NUMS));
@@ -117,20 +118,20 @@ public class CanPartition_01_Normal {
     }
 
     /**
-     * 简易备忘录(可优化)
+     * 备忘录(set实现)
      * 执行用时：131 ms, 在所有 Java 提交中击败了5.00%的用户
      * 内存消耗：39 MB, 在所有 Java 提交中击败了25.19%的用户
      * */
     public boolean canPartition4(int[] nums) {
-        // 常规判定
-        int sum = 0;
+        int sum = 0;        // 求和
         for (int temp : nums) {
             sum += temp;
         }
-        if (sum % 2 != 0){
+        if (sum % 2 != 0){  // 常规判定
             return false;
         }
         sum = sum/2;
+        // 初始化备忘录
         HashSet<Integer> set = new HashSet<Integer>();
         set.add(0);
         // 顺序取数字
@@ -144,9 +145,44 @@ public class CanPartition_01_Normal {
                     return true;
                 }
                 tempList.add(current);
-//                set.add(current);
             }
             set.addAll(tempList);
+        }
+        return false;
+    }
+
+    /**
+     * 备忘录(map实现)
+     * 执行用时：190 ms, 在所有 Java 提交中击败了5.01%的用户
+     * 内存消耗：38.9 MB, 在所有 Java 提交中击败了37.79%的用户
+     * */
+    public boolean canPartition5(int[] nums) {
+        int sum = 0;        // 求和
+        for (int temp : nums) {
+            sum += temp;
+        }
+        if (sum % 2 != 0){  // 常规判定
+            return false;
+        }
+        sum = sum/2;
+        // 初始化备忘录
+        HashMap<Integer, Integer> memory = new HashMap<>();
+        memory.put(sum, 0);
+        Arrays.sort(nums);
+        // 顺序取数字
+        for (int num : nums) {
+            if (memory.containsKey(num)){
+                return true;
+            }
+            HashMap<Integer, Integer> tempMap = new HashMap<>();
+            for (int preSum : memory.values()) {
+                int current = num + preSum;
+                if (current > sum){
+                    break;
+                }
+                tempMap.put(sum - current, current);
+            }
+            memory.putAll(tempMap);
         }
         return false;
     }
