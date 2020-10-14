@@ -28,9 +28,9 @@ public class SwapNodesInPairs_Normal {
         if(head == null || head.next == null){
             return head;
         }
-        ListNode newNode = head.next;
-        head.next = swapPairs(newNode.next);
-        newNode.next = head;
+        ListNode newNode = head.next;           // 新节点为当前节点的下一个节点
+        head.next = swapPairs(newNode.next);    // 当前节点下一个节点的指针，指向当前节点的下下个节点(递归得到)
+        newNode.next = head;                    // 新节点的下一个节点指向当前节点
         return newNode;
     }
 
@@ -46,10 +46,10 @@ public class SwapNodesInPairs_Normal {
         while (temp.next != null && temp.next.next != null ){
             ListNode next = temp.next;
             ListNode next2 = temp.next.next;
-            temp.next = next2;
-            next.next = next2.next;
-            next2.next = next;
-            temp = next;
+            temp.next = next2;      // 前驱结点的指针，指向下面第二个节点
+            next.next = next2.next; // 下面第一个节点的指针，指向下面第二个节点后面节点(下面第三个节点)
+            next2.next = next;      // 下面第二个节点的指针，指向下面第一个节点
+            temp = next;            // 移动前驱节点
         }
         return resNode.next;
     }
