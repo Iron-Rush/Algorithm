@@ -87,7 +87,7 @@ public class FindCommonChars_Easy {
         // 生成统计结果为string
         for (int i = 0; i < 26; i++) {
             while (wordCounter[i] != 0){
-                resList.add(String.valueOf((char)(i + 97)));
+                resList.add(Character.toString((char)('a' + i)));
                 wordCounter[i]--;
             }
         }
