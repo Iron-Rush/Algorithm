@@ -1,4 +1,4 @@
-package cn.czl.string;
+package cn.czl.string.generate;
 
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;

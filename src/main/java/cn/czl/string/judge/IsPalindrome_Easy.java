@@ -1,4 +1,4 @@
-package cn.czl.string;
+package cn.czl.string.judge;
 
 import org.junit.jupiter.api.Test;
 

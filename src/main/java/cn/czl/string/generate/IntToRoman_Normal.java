@@ -1,4 +1,4 @@
-package cn.czl.string;
+package cn.czl.string.generate;
 
 /**
  * @author RedRush
