@@ -34,11 +34,11 @@ public class IterationTraversalTreeNode_Demo {
                 if (tempNode.right != null){    // 添加右节点
                     stack.push(tempNode.right);
                 }
-                stack.push(tempNode);          // 添加中节点
-                stack.push(null);        // 中节点访问过，但未处理，做标记(单独添加中间节点，通过null识别)
                 if (tempNode.left != null){    // 添加左节点
                     stack.push(tempNode.left);
                 }
+                stack.push(tempNode);          // 添加中节点
+                stack.push(null);        // 中节点访问过，但未处理，做标记(单独添加中间节点，通过null识别)
             }else {
 //                stack.pop();                   // 弹出空节点
                 tempNode = stack.pop();        // 重新取出栈中元素
