@@ -29,7 +29,7 @@ public class ValidMountainArray_Easy {
 
     /**
      * 线性扫描，标记上下坡
-     * 执行用时：2 ms, 在所有 Java 提交中击败了41.65%的用户
+     * 执行用时：1 ms, 在所有 Java 提交中击败了100.00%的用户
      * 内存消耗：39.1 MB, 在所有 Java 提交中击败了98.35%的用户
      * */
     public boolean validMountainArray(int[] A) {
@@ -37,16 +37,11 @@ public class ValidMountainArray_Easy {
             return false;
         }
         int pos = 1;
-        boolean up = false, down = false;
-        if (A[pos] > A[pos-1]){
-            up = true;
-        }
+        boolean up = A[pos] > A[pos-1] ? true : false;
         while (pos < A.length && A[pos] > A[pos-1]){
             pos ++;
         }
-        if (pos < A.length && A[pos] < A[pos-1]){
-            down = true;
-        }
+        boolean down = (pos < A.length && A[pos] < A[pos-1]) ? true : false;
         while (pos < A.length && A[pos] < A[pos-1]){
             pos ++;
         }
