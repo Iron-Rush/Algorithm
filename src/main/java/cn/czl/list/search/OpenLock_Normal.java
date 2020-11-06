@@ -1,5 +1,7 @@
 package cn.czl.list.search;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -22,6 +24,20 @@ import java.util.Set;
  */
 public class OpenLock_Normal {
 
+    private String[] DEADENDS = new String[]{"0201","0101","0102","1212","2002"};
+    private String TARGET = "0202";
+
+    @Test
+    public void TestSolution(){
+        System.out.println(openLock2(DEADENDS, TARGET));
+    }
+
+    /**
+     * BFS-广度优先搜索(带HashSet记录走过的位置，和死锁位置)
+     * 上拨/下拨工具类
+     * 执行用时：91 ms, 在所有 Java 提交中击败了67.31%的用户
+     * 内存消耗：44.1 MB, 在所有 Java 提交中击败了60.32%的用户
+     * */
     public int openLock(String[] deadends, String target) {
         // 记录需要跳过的死亡密码
         Set<String> deads = new HashSet<>();
@@ -63,6 +79,54 @@ public class OpenLock_Normal {
             count++;    // 增加步数
         }
         return -1;  // 若穷举过程中未返回，则说明无解
+    }
+
+    /**
+     * 双向BFS(优化)    **双向BFS，须知道起点和终点位置
+     * 执行用时：27 ms, 在所有 Java 提交中击败了98.70%的用户
+     * 内存消耗：39.2 MB, 在所有 Java 提交中击败了97.70%的用户
+     * */
+    public int openLock2(String[] deadends, String target) {
+        Set<String> deads = new HashSet<>();
+        for (String temp : deadends) {
+            deads.add(temp);
+        }
+        // 不用队列，改用Set快速判断元素是否存在
+        Set<String> q1 = new HashSet<>();
+        Set<String> q2 = new HashSet<>();
+        Set<String> visited = new HashSet<>();
+        q1.add("0000");
+        q2.add(target);
+        int step = 0;
+        while (!q1.isEmpty() && !q2.isEmpty()){
+            // 用于存储本次迭代结果的临时set(HashSet在遍历过程中不能修改)
+            Set<String> temp = new HashSet<>();
+            // 扩散q1
+            for (String cur : q1) {
+                if (deads.contains(cur)){
+                    continue;
+                }
+                if (q2.contains(cur)){  // 若q2中存在当前数，则相遇->返回步数
+                    return step;
+                }
+                visited.add(cur);
+                // 存储每个扩散的可能性
+                for (int i = 0; i < 4; i++) {
+                    String up = upOne(cur, i);
+                    String down = downOne(cur, i);
+                    if (!visited.contains(up)){
+                        temp.add(up);
+                    }
+                    if (!visited.contains(down)){
+                        temp.add(down);
+                    }
+                }
+            }
+            step++;     // 步进
+            q1 = q2;    // 交换q1,q2
+            q2 = temp;  // 保存本轮扩散结果
+        }
+        return -1;
     }
 
     // 向上拨动
