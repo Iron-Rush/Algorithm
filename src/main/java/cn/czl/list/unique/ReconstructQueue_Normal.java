@@ -72,15 +72,15 @@ public class ReconstructQueue_Normal {
      * 内存消耗：39.2 MB, 在所有 Java 提交中击败了93.56%的用户
      * */
     public int[][] reconstructQueue2(int[][] people) {
-        Arrays.sort(people, (p1, p2) ->{
+        Arrays.sort(people, (p1, p2) ->{    // 按照h升序，h相同按k降序排列
             return p1[0] == p2[0] ? p2[1] - p1[1] : p1[0] - p2[0];
         });
         int[][] res= new int[people.length][];
         for (int[] p : people) {    // 从左向右，计数插入。因为已入队人均矮于自己，计数空位等于自己的k时插入
-            int count = p[1], pos = 0;
+            int count = p[1], pos = 0;// count为需要跳过的空位数，pos为从左向右的指针
             while (res[pos] != null || count != 0){
-                if(res[pos] == null){
-                    count--;
+                if(res[pos] == null){ // 如果该位为空，则记录空位数
+                    count--;          // 否则仅移动指针
                 }
                 pos++;
             }

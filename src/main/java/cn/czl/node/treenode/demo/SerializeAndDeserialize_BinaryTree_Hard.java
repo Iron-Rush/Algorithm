@@ -1,4 +1,5 @@
-package cn.czl.node.treenode;
+package cn.czl.node.treenode.demo;
+
 
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +30,7 @@ import java.util.Queue;
 public class SerializeAndDeserialize_BinaryTree_Hard {
     @Test
     public void TestSolution(){
-        String treeStr = "1,2,3,null,null,4,5,6,7";
+        String treeStr = "1,2,3,null,null,4,5";
         String treeStr2 = "1,2,3,null,null,4,5,null,null,null,null,6,7,null,null";
         TreeNode root = deserialize(treeStr);
         dfs(root);
