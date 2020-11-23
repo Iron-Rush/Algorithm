@@ -72,7 +72,6 @@ public class RotateArray_Normal {
         reverse(nums, 0, k-1);
         reverse(nums, k, nums.length-1);
     }
-
     // 反转函数
     void reverse(int[] nums, int start, int end){
         while (start < end){
@@ -83,4 +82,22 @@ public class RotateArray_Normal {
             end--;
         }
     }
+
+    /**
+     * 使用额外数组先转换好目标位置
+     * 再赋值给原先数组
+     * 执行用时：1 ms, 在所有 Java 提交中击败了56.59%的用户
+     * 内存消耗：39 MB, 在所有 Java 提交中击败了83.53%的用户
+     * */
+    public void rotate3(int[] nums, int k) {
+        k %= nums.length;
+        int[] rotateArray = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            rotateArray[(i+k) % nums.length] = nums[i];
+        }
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = rotateArray[i];
+        }
+    }
+
 }
