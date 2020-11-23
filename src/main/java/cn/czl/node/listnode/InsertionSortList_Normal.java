@@ -14,6 +14,10 @@ import java.util.List;
  */
 public class InsertionSortList_Normal {
 
+    /**
+     * 执行用时：3 ms, 在所有 Java 提交中击败了98.70%的用户
+     * 内存消耗：38.5 MB, 在所有 Java 提交中击败了14.04%的用户
+     * */
     public ListNode insertionSortList(ListNode head) {
         if (head == null || head.next == null){
             return head;
