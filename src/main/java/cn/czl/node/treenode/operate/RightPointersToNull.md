@@ -12,7 +12,7 @@ struct Node {
 3.初始状态下，所有 next 指针都被设置为 NULL。
 
 示例：
-![PopulatingNextRightPointersInEachNode](../../../../../resources/node/PopulatingNextRightPointersInEachNode.png "PopulatingNextRightPointersInEachNode")
+![PopulatingNextRightPointersInEachNode](../../../../../../resources/node/PopulatingNextRightPointersInEachNode.png "PopulatingNextRightPointersInEachNode")
 
 ```
 输入：{"$id":"1","left":{"$id":"2","left":{"$id":"3","left":null,"next":null,"right":null,"val":4},"next":null,"right":{"$id":"4","left":null,"next":null,"right":null,"val":5},"val":2},"next":null,"right":{"$id":"5","left":{"$id":"6","left":null,"next":null,"right":null,"val":6},"next":null,"right":{"$id":"7","left":null,"next":null,"right":null,"val":7},"val":3},"val":1}

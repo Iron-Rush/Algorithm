@@ -1,5 +1,6 @@
 
-package cn.czl.node.treenode;
+package cn.czl.node.treenode.operate;
+
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -16,7 +16,7 @@ struct Node {
 - 使用递归解题也符合要求，本题中递归程序占用的栈空间不算做额外的空间复杂度。
  
 示例：
-![PopulatingNextRightPointersInEachNode2](../../../../../resources/node/PopulatingNextRightPointersInEachNode2.png "PopulatingNextRightPointersInEachNode2")
+![PopulatingNextRightPointersInEachNode2](../../../../../../resources/node/PopulatingNextRightPointersInEachNode2.png "PopulatingNextRightPointersInEachNode2")
 
 ```
 输入：root = [1,2,3,4,5,null,7]

@@ -1,4 +1,4 @@
-package cn.czl.node.treenode;
+package cn.czl.node.treenode.search;
 
 import org.junit.jupiter.api.Test;
 
