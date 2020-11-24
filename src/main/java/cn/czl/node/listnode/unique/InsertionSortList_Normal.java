@@ -1,4 +1,4 @@
-package cn.czl.node.listnode;
+package cn.czl.node.listnode.unique;
 
 import java.util.List;
 
