@@ -1,4 +1,4 @@
-package cn.czl.node.listnode;
+package cn.czl.node.listnode.judge;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,10 +19,11 @@ public class IsPalindrome_Easy {
     @Test
     public void TestSolution(){
         ListNode head = new ListNode(1);
-        head.next = new ListNode(2);
-        head.next.next = new ListNode(2);
-        head.next.next.next = new ListNode(1);
-        System.out.println(isPalindrome3(head));
+        head.next = new ListNode(1);
+//        head.next.next = new ListNode(1);
+//        head.next.next.next = new ListNode(1);
+//        head.next.next.next.next = new ListNode(1);
+        System.out.println(isPalindrome4(head));
     }
 
     /**
@@ -105,5 +106,53 @@ public class IsPalindrome_Easy {
             pre = pre.next;
         }
         return true;
+    }
+
+    /**
+     * 执行用时：1 ms, 在所有 Java 提交中击败了99.96%的用户
+     * 内存消耗：41 MB, 在所有 Java 提交中击败了81.31%的用户
+     * */
+    public boolean isPalindrome4(ListNode head) {
+        if(head == null || head.next == null){
+            return true;
+        }
+        ListNode fast = head.next, slow = head;
+        while (fast.next != null && fast.next.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        ListNode l2 = slow.next;
+        if(fast.next != null){
+            l2 = l2.next;
+        }
+        slow.next = null;
+        ListNode l1 = reverse(head);
+        return compare(l2, l1);
+    }
+
+    // 比较两个链表是否一样
+    private boolean compare(ListNode l2, ListNode l1) {
+        while (l1 != null && l2 != null){
+            if (l1.val != l2.val){
+                return false;
+            }else {
+                l1 = l1.next;
+                l2 = l2.next;
+            }
+        }
+        return true;
+    }
+
+    // 翻转传入链表
+    private ListNode reverse(ListNode head){
+        ListNode prev = null;
+        ListNode pos = head;
+        while (pos != null){
+            ListNode temp = pos.next;
+            pos.next = prev;
+            prev = pos;
+            pos = temp;
+        }
+        return prev;
     }
 }
