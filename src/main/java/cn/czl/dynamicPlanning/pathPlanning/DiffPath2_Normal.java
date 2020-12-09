@@ -34,6 +34,11 @@ public class DiffPath2_Normal {
         System.out.println(path);
     }
 
+    /**
+     * 根据传入数组判断该位置是否有障碍，创建新数组进行运算
+     * 执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户
+     * 内存消耗：37.7 MB, 在所有 Java 提交中击败了48.67%的用户
+     * */
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
         int row = obstacleGrid.length;
         int col = obstacleGrid[0].length;
@@ -59,30 +64,60 @@ public class DiffPath2_Normal {
         return dp[row-1][col-1];
     }
 
-//    public int uniquePathsWithObstacles2(int[][] obstacleGrid) {
-//        int row = obstacleGrid.length;
-//        int col = obstacleGrid[0].length;
-//        // 为空判断
-//        if (obstacleGrid == null || obstacleGrid[0][0] == 1){
-//            return 0;
-//        }
-////        obstacleGrid[0][0] = obstacleGrid[0][0] == 0 ? 1 : 0;
-//        for (int i = 0; i < row; i++) {
-//            for (int j = 0; j < col; j++) {
-//                if (i == 0 || j == 0) {
-//                    if (obstacleGrid[i][j] == 0) {
-//                        obstacleGrid[i][j] = 1;
-//                    } else {
-//                        obstacleGrid[i][j] = -1;
-//                    }
-//                }else if (obstacleGrid[i][j] == 1){
-//                    obstacleGrid[i][j] = 0;
-//                }else{
-//                    obstacleGrid[i][j] = obstacleGrid[i][j-1] + obstacleGrid[i-1][j];
-//                }
-//            }
-//        }
-//        return obstacleGrid[row-1][col-1];
-//    }
+    /**
+     * 基于原数组直接规划路线
+     * 执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户
+     * 内存消耗：36.6 MB, 在所有 Java 提交中击败了89.29%的用户
+     * */
+    public int uniquePathsWithObstacles2(int[][] obstacleGrid) {
+        int ySize = obstacleGrid.length;
+        int xSize = obstacleGrid[0].length;
+        if(xSize == 0 || ySize == 0){
+            return 0;
+        }
+        for(int i = 0; i < ySize && obstacleGrid[i][0] == 0; i++){
+            obstacleGrid[i][0] = -1;
+        }
+        for(int i = 1; i < xSize && obstacleGrid[0][0] == -1 && obstacleGrid[0][i] == 0; i++){
+            obstacleGrid[0][i] = -1;
+        }
+        for(int y = 1; y < ySize; y++){
+            for(int x = 1; x < xSize; x++){
+                if(obstacleGrid[y][x] == 0){
+                    int a = obstacleGrid[y][x-1] <= 0 ? obstacleGrid[y][x-1] : 0;
+                    int b = obstacleGrid[y-1][x] <= 0 ? obstacleGrid[y-1][x] : 0;
+                    obstacleGrid[y][x] = a + b;
+                }
+            }
+        }
+        return obstacleGrid[ySize-1][xSize-1] <= 0 ? -obstacleGrid[ySize-1][xSize-1] : 0;
+    }
+
+    /**
+     * 基于原数组直接规划路线2[优化判断逻辑]
+     * 全部障碍置0。
+     * 执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户
+     * 内存消耗：36.7 MB, 在所有 Java 提交中击败了84.06%的用户
+     * */
+    public int uniquePathsWithObstacles3(int[][] obstacleGrid) {
+        int ySize = obstacleGrid.length;
+        int xSize = obstacleGrid[0].length;
+        if(xSize == 0 || ySize == 0){
+            return 0;
+        }
+        obstacleGrid[0][0] = obstacleGrid[0][0] == 0 ? -1 : 0;
+        for(int i = 1; i < ySize; i++){     // 若当前格无障碍，则去此格前一格的值，否则置0
+            obstacleGrid[i][0] = obstacleGrid[i][0] == 0 ? obstacleGrid[i-1][0] : 0;
+        }
+        for(int i = 1; i < xSize; i++){     // 若当前格无障碍，则去此格前一格的值，否则置0
+            obstacleGrid[0][i] = obstacleGrid[0][i] == 0 ? obstacleGrid[0][i-1] : 0;
+        }
+        for(int y = 1; y < ySize; y++){
+            for(int x = 1; x < xSize; x++){
+                obstacleGrid[y][x] = obstacleGrid[y][x] == 0 ? obstacleGrid[y-1][x] + obstacleGrid[y][x-1] : 0;
+            }
+        }
+        return obstacleGrid[ySize-1][xSize-1] <= 0 ? -obstacleGrid[ySize-1][xSize-1] : 0;
+    }
 
 }
