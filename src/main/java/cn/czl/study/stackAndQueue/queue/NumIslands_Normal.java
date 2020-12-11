@@ -1,4 +1,4 @@
-package cn.czl.study.stackAndQueue;
+package cn.czl.study.stackAndQueue.queue;
 
 import org.junit.jupiter.api.Test;
 
