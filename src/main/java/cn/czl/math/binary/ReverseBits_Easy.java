@@ -1,5 +1,7 @@
 package cn.czl.math.binary;
 
+import org.junit.jupiter.api.Test;
+
 /**
  * @author RedRush
  * @date 2020/12/10 17:41
@@ -15,7 +17,49 @@ package cn.czl.math.binary;
  */
 public class ReverseBits_Easy {
 
+    /**
+     * Java自带reverse函数，直接调用颠倒二进制位
+     * 执行用时：1 ms, 在所有 Java 提交中击败了100.00%的用户
+     * 内存消耗：38.2 MB, 在所有 Java 提交中击败了61.83%的用户
+     * */
     public int reverseBits(int n) {
         return Integer.reverse(n);
+    }
+
+    /**
+     * 逐位颠倒
+     * */
+    public int reverseBits2(int n) {
+        int result = 0;
+        for (int power = 31; power >0 ; power--) {
+            result += (n & 1) << power;
+            n >>= 1;
+        }
+        return result;
+    }
+
+    public int reverseBits3(int n) {
+        int result = 0;
+        for (int i = 0; i < 32; i++) {
+            result <<= 1;
+            result += n & 1;
+            n >>= 1;
+        }
+        return result;
+    }
+
+
+    @Test
+    public void TestSolution(){
+        int a = 125, b = 1;
+        System.out.println(Integer.toBinaryString(a));         // 1111101
+        System.out.println(Integer.toBinaryString(a & b));  // 1
+        System.out.println(Integer.toBinaryString(a | b));  // 1111101
+        System.out.println(Integer.toBinaryString(a ^ b));  // 1111100
+        System.out.println(Integer.toBinaryString(~a)); // 11111111111111111111111110000010
+        System.out.println(Integer.toBinaryString(0x55555555));
+        System.out.println(Integer.toBinaryString(0x33333333));
+        System.out.println(Integer.toBinaryString(0x0f0f0f0f));
+        System.out.println(Integer.toBinaryString(0xff00));
     }
 }

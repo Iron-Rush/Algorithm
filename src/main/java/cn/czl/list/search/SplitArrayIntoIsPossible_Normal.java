@@ -215,4 +215,42 @@ public class SplitArrayIntoIsPossible_Normal {
         return true;
     }
 
+    /**
+     * 双数组，分别存储数字个数，与队尾个数
+     * 执行用时：4 ms, 在所有 Java 提交中击败了92.45%的用户
+     * 内存消耗：39.2 MB, 在所有 Java 提交中击败了95.04%的用户
+     * */
+    public boolean isPossible5(int[] nums){
+        int n0 = nums[0];
+        int length = nums[nums.length-1] - n0 + 1;  // 不重复数字的总数
+        int[] count = new int[length+1],    // 记录每个数字的个数
+                end = new int[length+1];    // 记录每个生成数组的尾部数量
+        for (int num : nums) {      // 初始化计数器
+            count[getIndex(num, n0)]++;
+        }
+        for (int index = 1; index <= length;) {
+            if(count[index] == 0){  // 检查当前数字是否已使用完
+                index++;
+                continue;
+            }
+            count[index]--;
+            if(end[index-1] > 0){   // 如果有队尾可以拼接，则优先拼接至队尾
+                end[index-1]--;
+                end[index]++;
+            }else {         // 查看是否能一次性生成长度为3的数组
+                if (index + 2 <= length && count[index+1] > 0 && count[index+2] > 0){
+                    count[index+1]--;
+                    count[index+2]--;
+                    end[index+2]++;
+                }else {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    int getIndex(int index, int n0){
+        return index - n0 + 1;
+    }
+
 }
