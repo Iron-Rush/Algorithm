@@ -1,4 +1,4 @@
-package cn.czl.list.search;
+package cn.czl.list.search.stock;
 
 import org.junit.jupiter.api.Test;
 

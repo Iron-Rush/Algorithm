@@ -1,4 +1,4 @@
-package cn.czl.list.search;
+package cn.czl.list.search.max;
 
 import org.junit.jupiter.api.Test;
 
