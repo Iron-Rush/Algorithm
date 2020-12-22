@@ -56,6 +56,9 @@ public class EvaluateReversePolishNotation_Normal {
     }
 
     /**
+     * 先判断当前位是否为运算符
+     * 若为操作符 则出栈两位数字，进行运算，将运算结果入栈
+     * 若为数字   则入栈
      * 执行用时： 6 ms , 在所有 Java 提交中击败了 88.45% 的用户
      * 内存消耗： 37.8 MB , 在所有 Java 提交中击败了 97.29% 的用户
      * */
@@ -73,6 +76,7 @@ public class EvaluateReversePolishNotation_Normal {
         }
         return stack.pop();
     }
+    // 判断当前字符是否为操作符
     int isOperator(String target){
         switch (target){
             case "+":
@@ -87,6 +91,7 @@ public class EvaluateReversePolishNotation_Normal {
                 return 0;
         }
     }
+    // 根据操作符类型，对传入数字进行运算
     int calculator(int a, int b, int flag){
         switch (flag){
             case 1:
@@ -100,5 +105,63 @@ public class EvaluateReversePolishNotation_Normal {
             default:
                 return 0;
         }
+    }
+
+    /**
+     * 执行用时： 6 ms , 在所有 Java 提交中击败了 88.45% 的用户
+     * 内存消耗： 38 MB , 在所有 Java 提交中击败了 91.39% 的用户
+     * */
+    public int evalRPN2(String[] tokens) {
+        Stack<Integer> stack = new Stack<>();
+        for (String s : tokens) {
+            switch (s){
+                case "+":
+                    stack.push(stack.pop() + stack.pop());
+                    break;
+                case "-":
+                    int a = stack.pop();
+                    stack.push(stack.pop() - a);
+                    break;
+                case "*":
+                    stack.push(stack.pop() * stack.pop());
+                    break;
+                case "/":
+                    int b = stack.pop();
+                    stack.push(stack.pop() / b);
+                    break;
+                default:
+                    stack.add(Integer.valueOf(s));
+            }
+        }
+        return stack.pop();
+    }
+
+    /**
+     * 直接使用数组，模拟栈
+     * 执行用时： 3 ms , 在所有 Java 提交中击败了 99.52% 的用户
+     * 内存消耗： 38.4 MB , 在所有 Java 提交中击败了 52.60% 的用户
+     * */
+    public int evalRPN3(String[] tokens) {
+        int[] numStack = new int[tokens.length/2 + 1];
+        int pos = 0;
+        for (String s : tokens) {
+            switch (s){     // 如果为运算符，将pos-2 与 pos-1进行运算
+                case "+":   // 并将pos指向pos-1
+                    numStack[pos - 2] += numStack[--pos];
+                    break;
+                case "-":
+                    numStack[pos - 2] -= numStack[--pos];
+                    break;
+                case "*":
+                    numStack[pos - 2] *= numStack[--pos];
+                    break;
+                case "/":
+                    numStack[pos - 2] /= numStack[--pos];
+                    break;
+                default:
+                    numStack[pos++] = Integer.valueOf(s);
+            }
+        }
+        return numStack[pos];
     }
 }

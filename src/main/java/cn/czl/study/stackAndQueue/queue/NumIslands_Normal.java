@@ -46,7 +46,7 @@ public class NumIslands_Normal {
     /**
      * dfs-深度优先搜索，填充本岛屿土地。
      * 执行用时：2 ms, 在所有 Java 提交中击败了93.42%的用户
-     * 内存消耗：41.3 MB, 在所有 Java 提交中击败了27.55%的用户
+     * 内存消耗：40.8 MB, 在所有 Java 提交中击败了84.66%的用户
      * */
     public int numIslands(char[][] grid) {
         if (grid == null || grid.length == 0 || grid[0].length == 0)   return 0;
@@ -63,7 +63,7 @@ public class NumIslands_Normal {
         }
         return count;
     }
-    // 深度优先搜索-填充小岛
+    // dfs-深度优先搜索-填充小岛
     void fillIslands(char[][] grid, int x, int y, int xSize, int ySize){
         if(x < 0 || y < 0 || x >= xSize || y >= ySize){
             return;
