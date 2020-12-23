@@ -1,7 +1,9 @@
 package cn.czl.study.stackAndQueue.stack;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Stack;
 
 /**
  * @author RedRush
@@ -26,6 +28,33 @@ public class DFS_TEMPLATE {
                     return true;
                 }else {
                     continue;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @Author: RedRush
+     * @Date:   2020/12/23 15:06
+     * @description: DFS迭代实现模版
+     */
+    boolean DFS2(Node root, Node target){
+        Stack<Node> stack = new Stack<>();
+        Set<Node> visited = new HashSet<>();
+        if(root != null){
+            stack.add(root);
+            visited.add(root);
+        }
+        while (!stack.isEmpty()){
+            Node cur = stack.pop();
+            if(cur == target){
+                return true;
+            }
+            for (Node next : cur.neighbors) {
+                if(visited.contains(next)){
+                    stack.add(next);
+                    visited.add(next);
                 }
             }
         }

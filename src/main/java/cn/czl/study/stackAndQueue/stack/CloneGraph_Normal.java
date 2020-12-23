@@ -20,7 +20,19 @@ public class CloneGraph_Normal {
 
     @Test
     public void TestSolution(){
-        Node res = cloneGraph(new Node(1));
+        Node n1 = new Node(1);
+        Node n2 = new Node(1);
+        Node n3 = new Node(1);
+        Node n4 = new Node(1);
+        n1.neighbors.add(n2);
+        n1.neighbors.add(n4);
+        n2.neighbors.add(n1);
+        n2.neighbors.add(n3);
+        n3.neighbors.add(n2);
+        n3.neighbors.add(n4);
+        n4.neighbors.add(n1);
+        n4.neighbors.add(n3);
+        Node res = cloneGraph(n1);
         System.out.println(res.val);
     }
 
