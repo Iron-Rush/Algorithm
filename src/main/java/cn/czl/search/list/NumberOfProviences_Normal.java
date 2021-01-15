@@ -86,11 +86,35 @@ public class NumberOfProviences_Normal {
     }
 
     /**
-     * 并查集
+     * 并查集1     直接使用模版
+     * 执行用时： 2 ms , 在所有 Java 提交中击败了 45.13% 的用户
+     * 内存消耗： 39.1 MB , 在所有 Java 提交中击败了 87.59% 的用户
+     * */
+    public int findCircleNum3(int[][] isConnected) {
+        int count = 0;
+        int city = isConnected.length;
+        DSU dsu = new DSU(city);
+        for (int i = 0; i < city; i++) {
+            for (int j = 0; j < city; j++) {
+                if(isConnected[i][j] == 1){
+                    dsu.union(i, j);
+                }
+            }
+        }
+        for (int i = 0; i < city; i++) {
+            if(dsu.find(i) == i){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * 并查集2
      * 执行用时： 2 ms , 在所有 Java 提交中击败了 49.60% 的用户
      * 内存消耗： 39.2 MB , 在所有 Java 提交中击败了 87.65% 的用户
      * */
-    public int findCircleNum3(int[][] isConnected) {
+    public int findCircleNum4(int[][] isConnected) {
         int count = 0;
         int city = isConnected.length;
         int[] parent = new int[city];
@@ -119,5 +143,27 @@ public class NumberOfProviences_Normal {
             parent[index] = find(parent, parent[index]);
         }
         return parent[index];
+    }
+}
+
+
+class DSU{
+    int[] parent;
+
+    public DSU(int len){
+        parent = new int[len];
+        for (int i = 0; i < len; i++) {
+            parent[i] = i;
+        }
+    }
+    public int find(int x){
+        if(parent[x] != x){
+            parent[x] = find(parent[x]);
+        }
+        return parent[x];
+//        return parent[x] == x ? x : (parent[x] = find(parent[x]));
+    }
+    public void union(int x, int y){
+        parent[find(x)] = find(y);
     }
 }
