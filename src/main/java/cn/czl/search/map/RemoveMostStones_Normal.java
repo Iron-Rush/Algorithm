@@ -51,21 +51,21 @@ public class RemoveMostStones_Normal {
     }
 }
 // 并查集模版
-class UnionSearch{
-    private int[] parent;
-    public UnionSearch(int size){
-        parent = new int[size];
-        for(int i = 0; i < size; i++){
-            parent[i] = i;
-        }
-    }
-    public int search(int x){
-        if(parent[x] != x){
-            parent[x] = search(parent[x]);
-        }
-        return parent[x];
-    }
-    public void union(int x, int y){
-        parent[search(x)] = search(y);
-    }
-}
+//class UnionSearch{
+//    private int[] parent;
+//    public UnionSearch(int size){
+//        parent = new int[size];
+//        for(int i = 0; i < size; i++){
+//            parent[i] = i;
+//        }
+//    }
+//    public int search(int x){
+//        if(parent[x] != x){
+//            parent[x] = search(parent[x]);
+//        }
+//        return parent[x];
+//    }
+//    public void union(int x, int y){
+//        parent[search(x)] = search(y);
+//    }
+//}
