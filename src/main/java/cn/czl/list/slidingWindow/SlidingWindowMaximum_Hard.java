@@ -61,14 +61,6 @@ public class SlidingWindowMaximum_Hard {
 
     
     public int[] maxSlidingWindow(int[] nums, int k) {
-        /**
-         * @Author: RedRush
-         * @Date:   2021/2/26 9:41
-         * @param nums
-         * @param k
-         * @Return: int[]
-         * @description:
-         */
         int len = nums.length;
         if(len <= 1 || k == 1){
             return nums;
