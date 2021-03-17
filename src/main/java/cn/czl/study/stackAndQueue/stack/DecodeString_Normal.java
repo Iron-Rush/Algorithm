@@ -35,13 +35,15 @@ public class DecodeString_Normal {
 
     @Test
     public void TestSolution(){
-        System.out.println(decodeString(S1));
+//        System.out.println(decodeString(S1));
         System.out.println(decodeString(S2));
-        System.out.println(decodeString(S3));
-        System.out.println(decodeString(S4));
+//        System.out.println(decodeString(S3));
+//        System.out.println(decodeString(S4));
     }
 
     /**
+     * 栈操作
+     * 栈中暂存不参与叠加的字符串，和当前字符串的叠加被树
      * 执行用时： 1 ms , 在所有 Java 提交中击败了 87.59% 的用户
      * 内存消耗： 36.7 MB , 在所有 Java 提交中击败了 38.57% 的用户
      * */
@@ -53,14 +55,14 @@ public class DecodeString_Normal {
         for(char ch : s.toCharArray()){
             if(Character.isDigit(ch)){
                 num = num * 10 + (ch - '0');
-            }else if(ch == '['){
-                numStack.add(num);
+            }else if(Character.isAlphabetic(ch)){   // 拼接当前括号内的字符串
+                sb.append(ch);
+            }else if(ch == '['){    // 遇见括号时，暂存当前字符串，数字
+                numStack.add(num);  // 避免后面叠加时，影响前面字符串
                 num = 0;
                 wordStack.add(sb);
                 sb = new StringBuilder();
-            }else if(Character.isAlphabetic(ch)){
-                sb.append(ch);
-            }else {
+            }else {     // 叠加括号中的字符串sb
                 StringBuilder temp = wordStack.pop();
                 int count = numStack.pop();
                 for (int i = 0; i < count; i++) {
@@ -70,5 +72,49 @@ public class DecodeString_Normal {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * 递归
+     * 递归拼接字符串，遇见数字则分别一次性获取倍数，及括号中的字符串
+     * 执行用时： 1 ms , 在所有 Java 提交中击败了 88.42% 的用户
+     * 内存消耗： 36.4 MB , 在所有 Java 提交中击败了 81.01% 的用户
+     * */
+    String src;
+    int ptr;
+    public String decodeString2(String s){
+        src = s;
+        ptr = 0;
+        return getString();
+    }
+    // 递归函数
+    public String getString(){
+        if(ptr == src.length() || src.charAt(ptr) == ']'){
+            return "";
+        }
+        char cur = src.charAt(ptr);
+        int repTime = 1;
+        String ret = "";
+        if(Character.isDigit(cur)){
+            repTime = getDigits();
+            ptr++;  // 数字后即为左括号，跳过左括号
+            String str = getString();
+            ptr++;  // 过滤右括号
+            while (repTime > 0){    // 根据倍数，子字符串，构建字符串
+                ret += str;
+                repTime--;
+            }
+        }else if(Character.isLetter(cur)){
+            ret = String.valueOf(src.charAt(ptr++));
+        }
+        return ret + getString();
+    }
+    // 获取倍数
+    private int getDigits(){
+        int res = 0;
+        while (ptr < src.length() && Character.isDigit(src.charAt(ptr))){
+            res = res * 10 + src.charAt(ptr++) - '0';
+        }
+        return res;
     }
 }
