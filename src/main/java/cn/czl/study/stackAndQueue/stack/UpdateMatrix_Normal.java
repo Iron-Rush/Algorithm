@@ -40,8 +40,8 @@ public class UpdateMatrix_Normal {
 
     @Test
     public void TestSolution(){
-        System.out.println(Arrays.deepToString(updateMatrix(MATRIX1)));
-        System.out.println(Arrays.deepToString(updateMatrix(MATRIX2)));
+        System.out.println(Arrays.deepToString(updateMatrix3(MATRIX1)));
+        System.out.println(Arrays.deepToString(updateMatrix3(MATRIX2)));
 
     }
 
@@ -128,6 +128,110 @@ public class UpdateMatrix_Normal {
                     ans[y1][x1] = ans[y][x] + 1;
                     queue.offer(new int[]{x1, y1});
                     visited[y1][x1] = true;
+                }
+            }
+        }
+        return ans;
+    }
+
+    /**
+     * 动态规划 - 从四个方向递推到达该位置的最近距离
+     * 执行用时： 9 ms , 在所有 Java 提交中击败了 78.70% 的用户
+     * 内存消耗： 41.8 MB , 在所有 Java 提交中击败了 53.26% 的用户
+     * */
+    public int[][] updateMatrix3(int[][] matrix) {
+        if (matrix == null || matrix.length == 0) {
+            return matrix;
+        }
+        int yEdge = matrix.length, xEdge = matrix[0].length;
+        int[][] ans = new int[yEdge][xEdge];
+        for (int y = 0; y < yEdge; y++) {       // 初始化dp数组
+            for (int x = 0; x < xEdge; x++) {
+                ans[y][x] = matrix[y][x] == 0 ? 0 : Integer.MAX_VALUE/2;
+            }
+        }
+        // 水平向左移动，竖直向上移动
+        for (int y = 0; y < yEdge; y++) {
+            for (int x = 0; x < xEdge; x++) {
+                if(y - 1 >= 0){
+                    ans[y][x] = Math.min(ans[y][x], ans[y-1][x] + 1);
+                }
+                if(x - 1 >= 0){
+                    ans[y][x] = Math.min(ans[y][x], ans[y][x-1] + 1);
+                }
+            }
+        }
+        // 水平向左移动，竖直向下移动
+        for (int y = yEdge - 1; y >= 0; y--) {
+            for (int x = 0; x < xEdge; x++) {
+                if(y + 1 < yEdge){
+                    ans[y][x] = Math.min(ans[y][x], ans[y+1][x] + 1);
+                }
+                if(x - 1 >= 0){
+                    ans[y][x] = Math.min(ans[y][x], ans[y][x-1] + 1);
+                }
+            }
+        }
+        // 水平向右移动，竖直向上移动
+        for (int y = 0; y < yEdge; y++) {
+            for (int x = xEdge - 1; x >= 0; x--) {
+                if(y - 1 >= 0){
+                    ans[y][x] = Math.min(ans[y][x], ans[y-1][x] + 1);
+                }
+                if(x + 1 < xEdge){
+                    ans[y][x] = Math.min(ans[y][x], ans[y][x+1] + 1);
+                }
+            }
+        }
+        // 水平向右移动，竖直向下移动
+        for (int y = yEdge - 1; y >= 0; y--) {
+            for (int x = xEdge - 1; x >= 0; x--) {
+                if(y + 1 < yEdge){
+                    ans[y][x] = Math.min(ans[y][x], ans[y+1][x] + 1);
+                }
+                if(x + 1 < xEdge){
+                    ans[y][x] = Math.min(ans[y][x], ans[y][x+1] + 1);
+                }
+            }
+        }
+        return ans;
+    }
+
+    /**
+     * 动态规划 - 四个方向优化[减免重复计算]
+     * 执行用时： 8 ms , 在所有 Java 提交中击败了 84.89% 的用户
+     * 内存消耗： 41.9 MB , 在所有 Java 提交中击败了 37.41% 的用户
+     * */
+    public int[][] updateMatrix4(int[][] matrix) {
+        if (matrix == null || matrix.length == 0) {
+            return matrix;
+        }
+        int yEdge = matrix.length, xEdge = matrix[0].length;
+        int[][] ans = new int[yEdge][xEdge];
+        for (int y = 0; y < yEdge; y++) {       // 初始化dp数组
+            for (int x = 0; x < xEdge; x++) {
+                ans[y][x] = matrix[y][x] == 0 ? 0 : Integer.MAX_VALUE/2;
+            }
+        }
+        // 水平向左移动，竖直向上移动
+        for (int y = 0; y < yEdge; y++) {
+            for (int x = 0; x < xEdge; x++) {
+                if(y - 1 >= 0){
+                    ans[y][x] = Math.min(ans[y][x], ans[y-1][x] + 1);
+                }
+                if(x - 1 >= 0){
+                    ans[y][x] = Math.min(ans[y][x], ans[y][x-1] + 1);
+                }
+            }
+        }
+        // 水平向右移动，竖直向下移动
+        for (int y = yEdge - 1; y >= 0; y--) {
+            for (int x = xEdge - 1; x >= 0; x--) {
+                if(y + 1 < yEdge){
+                    ans[y][x] = Math.min(ans[y][x], ans[y+1][x] + 1);
+                }
+                if(x + 1 < xEdge){
+                    ans[y][x] = Math.min(ans[y][x], ans[y][x+1] + 1);
                 }
             }
         }
