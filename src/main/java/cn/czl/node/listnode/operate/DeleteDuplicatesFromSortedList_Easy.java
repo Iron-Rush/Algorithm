@@ -30,4 +30,22 @@ public class DeleteDuplicatesFromSortedList_Easy {
         }
         return head;
     }
+
+    /**
+     * 迭代 - 删除重复节点。
+     * [如果当前节点与下一节点val相同，则next指针指向下下个节点；否则游标后移]
+     * 执行用时： 0 ms , 在所有 Java 提交中击败了 100.00% 的用户
+     * 内存消耗： 37.9 MB , 在所有 Java 提交中击败了 47.73% 的用户
+     * */
+    public ListNode deleteDuplicates2(ListNode head) {
+        ListNode cur = head;
+        while(cur != null && cur.next != null){
+            if(cur.val == cur.next.val){
+                cur.next = cur.next.next;
+            }else{
+                cur = cur.next;
+            }
+        }
+        return head;
+    }
 }

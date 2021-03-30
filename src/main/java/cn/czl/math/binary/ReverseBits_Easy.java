@@ -27,11 +27,14 @@ public class ReverseBits_Easy {
     }
 
     /**
-     * 逐位颠倒
+     * 逐位颠倒 (n & 1 为获取n的最右侧数字)
+     * 执行用时： 1 ms , 在所有 Java 提交中击败了 100.00% 的用户
+     * 内存消耗： 38.3 MB , 在所有 Java 提交中击败了 30.92% 的用户
+     * 炫耀一下:
      * */
     public int reverseBits2(int n) {
         int result = 0;
-        for (int power = 31; power >0 ; power--) {
+        for (int power = 31; power >= 0 ; power--) {
             result += (n & 1) << power;
             n >>= 1;
         }
