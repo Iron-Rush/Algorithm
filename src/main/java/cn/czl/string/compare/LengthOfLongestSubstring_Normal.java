@@ -54,6 +54,8 @@ public class LengthOfLongestSubstring_Normal {
     }
 
     /**
+     * map记录前一个字符所在下标，每次更新当前位置最近的下标
+     * 并计算得出当前的最长子串
      * 执行用时： 6 ms , 在所有 Java 提交中击败了 85.84% 的用户
      * 内存消耗： 38.6 MB , 在所有 Java 提交中击败了 52.49% 的用户
      * */
