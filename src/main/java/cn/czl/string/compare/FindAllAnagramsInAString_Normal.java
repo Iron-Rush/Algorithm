@@ -74,4 +74,74 @@ public class FindAllAnagramsInAString_Normal {
         }
         return res;
     }
+
+    /**
+     * 滑动窗口
+     * 窗口初始化优化
+     * 执行用时： 6 ms , 在所有 Java 提交中击败了 88.59% 的用户
+     * 内存消耗： 39.4 MB , 在所有 Java 提交中击败了 80.21% 的用户
+     * */
+    public List<Integer> findAnagrams2(String s, String p) {
+        List<Integer> res = new ArrayList<>();
+        int sLen = s.length(), pLen = p.length();
+        if(sLen < pLen){
+            return res;
+        }
+        char[] chs = s.toCharArray();
+        char[] pchs = p.toCharArray();
+        int[] target = new int[26];
+        int[] counter = new int[26];
+        for (int i = 0; i < pLen; i++) {
+            target[pchs[i] - 'a']++;
+            counter[chs[i] - 'a']++;
+        }
+        if(Arrays.equals(target, counter)){
+            res.add(0);
+        }
+        for (int i = pLen; i < sLen; i++) {
+            counter[chs[i - pLen] - 'a']--;
+            counter[chs[i] - 'a']++;
+            if(Arrays.equals(target, counter)){
+                res.add(i - pLen + 1);
+            }
+        }
+        return res;
+    }
+
+    /**
+     * 滑动窗口 + 双指针
+     * 执行用时： 5 ms , 在所有 Java 提交中击败了 94.20% 的用户
+     * 内存消耗： 39.5 MB , 在所有 Java 提交中击败了 57.79% 的用户
+     * */
+    public List<Integer> findAnagrams3(String s, String p) {
+        List<Integer> res = new ArrayList<>();
+        int sLen = s.length(), pLen = p.length();
+        if(sLen < pLen){
+            return res;
+        }
+
+        char[] chs = s.toCharArray();
+        char[] pchs = p.toCharArray();
+        int[] target = new int[26];
+        int[] counter = new int[26];
+
+        for (int i = 0; i < pLen; i++) {
+            target[pchs[i] - 'a']++;
+        }
+
+        int l = 0, r= 0;
+        for (; r < sLen; r++) {
+            int curR = chs[r] - 'a';
+            counter[curR]++;
+            while (counter[curR] > target[curR]){   // counter中的对应字符，永远不得多于target
+               int curL = chs[l] - 'a';
+               counter[curL]--;
+               l++;
+            }
+            if(r - l + 1 == pLen){
+                res.add(l);
+            }
+        }
+        return res;
+    }
 }

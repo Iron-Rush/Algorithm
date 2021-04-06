@@ -45,6 +45,7 @@ public class SlidingWindowMedian_Hard {
 
     /**
      * 暴力解，每次截取数组-排序-找到对应中位数
+     * 超出时间限制
      * */
     public double[] medianSlidingWindow(int[] nums, int k) {
         double[] res = new double[nums.length - k + 1];
