@@ -6,7 +6,7 @@
 - 给你二叉树的根节点，如果二叉树为 奇偶树 ，则返回 true ，否则返回 false 。
 
 示例 1：
-![isEvenOddTree1](../../../../../../resources/node/treenode/isEvenOddTree1.png "isEvenOddTree1")
+![isEvenOddTree1](../../../../../../resources/node/treenode/verify/isEvenOddTree1.png "isEvenOddTree1")
 ```
 输入：root = [1,10,4,3,null,7,9,12,8,6,null,null,2]
 输出：true
@@ -19,7 +19,7 @@
 ```
 
 示例 2：
-![isEvenOddTree2](../../../../../../resources/node/treenode/isEvenOddTree2.png "isEvenOddTree2")
+![isEvenOddTree2](../../../../../../resources/node/treenode/verify/isEvenOddTree2.png "isEvenOddTree2")
 ```
 输入：root = [5,4,2,3,3,7]
 输出：false
@@ -31,7 +31,7 @@
 ```
 
 示例 3：
-![isEvenOddTree3](../../../../../../resources/node/treenode/isEvenOddTree3.png "isEvenOddTree3")
+![isEvenOddTree3](../../../../../../resources/node/treenode/verify/isEvenOddTree3.png "isEvenOddTree3")
 ```
 输入：root = [5,9,1,3,5,7]
 输出：false
