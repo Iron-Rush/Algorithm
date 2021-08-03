@@ -15,36 +15,65 @@ import java.util.Map;
  */
 public class TransPicName {
 
-    private String PICHEAD = "前女友";
-    private String ROOT = "D:\\trans\\";
-    private String SOURCE = "D:\\Downloads\\前女友系列\\";
+    private String PICHEAD = "";
+    private String ROOT = "D:\\trans\\output\\";       // 文件输出路径
+    private String SOURCE = "D:\\Downloads\\pythonDownload\\new\\";     // 文件读取路径
+//    private String SOURCE = "D:\\Downloads\\前女友系列\\";     // 文件读取路径
 
     @Test
     public void TestGetFiles(){
-        int skip = 0, copy = 0;
-        List<File> files = getFiles(SOURCE);
-        CopyFile copyFile = new CopyFile();
-        for(File f : files){
-            if (skip(f)){
-                System.out.println("skip:" + f.getAbsolutePath());
-                skip++;
-                continue;
-            }
-            System.out.println(f.getAbsolutePath());
-            String picUrl = f.getAbsolutePath().substring(SOURCE.length()).replaceAll("\\\\", "_");
-//            picUrl = picUrl.replaceAll("9999 ", "");
-            picUrl = ROOT + PICHEAD + special(picUrl);
-            System.out.println(picUrl);
-            copyFile.copy(f.getAbsolutePath(), picUrl);
-            copy++;
+        File root = new File(ROOT);
+        if(!root.exists()){//如果文件夹不存在
+            root.mkdir();//创建文件夹
         }
-        System.out.println("拷贝任务结束，共" + files.size() + "个文件");
+        int skip = 0, copy = 0;
+        CopyFile copyFile = new CopyFile();
+//        List<File> files = getFiles(SOURCE);
+//        for(File f : files){
+//            if (skip(f)){
+//                System.out.println("skip:" + f.getAbsolutePath());
+//                f.delete();
+//                skip++;
+//                continue;
+//            }
+//            System.out.println(f.getAbsolutePath());
+//            String picUrl = f.getAbsolutePath().substring(SOURCE.length()).replaceAll("\\\\", "_");
+//            picUrl = ROOT + PICHEAD + special(picUrl);
+//            System.out.println(picUrl);
+//            copyFile.copy(f.getAbsolutePath(), picUrl);
+//            copy++;
+//        }
+        List<String> dirs = getDirs(SOURCE);
+            for (String d : dirs) {
+                String source = SOURCE + d + "\\";
+                String r = ROOT + d + "\\";
+                File rootDir = new File(r);
+                List<File> files = getFiles(source);
+                if(!rootDir.exists()){//如果文件夹不存在
+                    rootDir.mkdir();//创建文件夹
+                }
+                for(File f : files){
+                    if (skip(f)){
+                        System.out.println("skip:" + f.getAbsolutePath());
+                        f.delete();
+                        skip++;
+                        continue;
+                    }
+                    System.out.println(f.getAbsolutePath());
+                    String picUrl = f.getAbsolutePath().substring(source.length()).replaceAll("\\\\", "_");
+                    picUrl = r + PICHEAD + special(picUrl);
+                    System.out.println(picUrl);
+                    copyFile.copy(f.getAbsolutePath(), picUrl);
+                    copy++;
+                }
+        }
+        System.out.println("拷贝任务结束，共" + (copy + skip) + "个文件");
         System.out.println("拷贝" + copy + "个文件,跳过" + skip + "个文件");
     }
 
     // 目标文件名进行特判处理
     public String special(String str){
-        String res = str.replaceAll("9", "");
+        String res = str.replaceAll("", "");
         res = res.replaceAll(" ", "");
         return res;
     }
@@ -64,6 +93,18 @@ public class TransPicName {
             File[] subFiles = root.listFiles();
             for(File f : subFiles){
                 files.addAll(getFiles(f.getAbsolutePath()));
+            }
+        }
+        return files;
+    }
+
+    public List<String> getDirs(String path){
+        File root = new File(path);
+        List<String> files = new ArrayList<String>();
+        File[] subFiles = root.listFiles();
+        for (File f : subFiles) {
+            if (f.isDirectory()){
+                files.add(f.getName());
             }
         }
         return files;
