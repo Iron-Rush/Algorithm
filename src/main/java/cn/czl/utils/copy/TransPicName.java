@@ -16,8 +16,10 @@ import java.util.Map;
 public class TransPicName {
 
     private String PICHEAD = "";
-    private String ROOT = "D:\\trans\\output\\";       // 文件输出路径
-    private String SOURCE = "D:\\Downloads\\pythonDownload\\new\\";     // 文件读取路径
+//    private String ROOT = "D:\\trans\\output\\";       // 文件输出路径
+    private String ROOT = "D:\\trans\\docx\\";       // 文件输出路径
+//    private String SOURCE = "D:\\Downloads\\pythonDownload\\new\\";     // 文件读取路径
+    private String SOURCE = "G:\\Story\\";     // 文件读取路径
 //    private String SOURCE = "D:\\Downloads\\前女友系列\\";     // 文件读取路径
 
     @Test
