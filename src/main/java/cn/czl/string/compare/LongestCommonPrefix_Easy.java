@@ -28,7 +28,8 @@ public class LongestCommonPrefix_Easy {
 
     @Test
     public void TestSolution(){
-        System.out.println(longestCommonPrefix(STRS2));
+        System.out.println(longestCommonPrefix4(STRS2));
+//        System.out.println(longestCommonPrefix4(STRS1));
     }
 
     /**
@@ -75,5 +76,57 @@ public class LongestCommonPrefix_Easy {
             }
         }
         return pos < 0 ? "" : target.substring(0, pos + 1);
+    }
+
+    /**
+     * 横向比较
+     * 执行用时： 0 ms , 在所有 Java 提交中击败了 100.00% 的用户
+     * 内存消耗： 36.5 MB , 在所有 Java 提交中击败了 52.04% 的用户
+     * */
+    public String longestCommonPrefix3(String[] strs) {
+        if (strs == null || strs.length == 0){
+            return "";
+        }
+        String prefix = strs[0];
+        int count = strs.length;
+        for (int i = 1; i < count; i++) {
+            prefix = longestCommonPrefix(prefix, strs[i]);
+            if (prefix.length() == 0){
+                break;
+            }
+        }
+        return prefix;
+    }
+    // 获取当前两字符串的公共前缀
+    private String longestCommonPrefix(String s1, String s2){
+        int len = Math.min(s1.length(), s2.length());
+        int pos = 0;
+        while (pos < len && s1.charAt(pos) == s2.charAt(pos)){
+            pos++;
+        }
+        return s1.substring(0, pos);
+    }
+
+    /**
+     * 纵向比较 （指针超过当前字符串长度/字符不匹配是则停止）
+     * 执行用时： 0 ms , 在所有 Java 提交中击败了 100.00% 的用户
+     * 内存消耗： 36.5 MB , 在所有 Java 提交中击败了 52.04% 的用户
+     * */
+    public String longestCommonPrefix4(String[] strs) {
+        if(strs == null || strs.length == 0){
+            return "";
+        }
+        int len = strs[0].length();
+        int count = strs.length;
+        String target = strs[0];
+        for (int i = 0; i < len; i++) {
+            char ch = target.charAt(i);
+            for (int j = 1; j < count; j++) {
+                if(i == strs[j].length() || strs[j].charAt(i) != ch){
+                    return strs[0].substring(0, i);
+                }
+            }
+        }
+        return strs[0];
     }
 }
