@@ -2,6 +2,9 @@ package cn.czl.dynamicPlanning.study.primary;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author RedRush
  * @date 2020/12/10 10:13
@@ -26,7 +29,27 @@ public class ClimbStairs_Easy {
     public void TestSolution(){
         for (int i = 0; i < 8; i++) {
             System.out.println(climbStairs(i));
+            System.out.println(climbStairs2(i));
+            System.out.println(climbStairs3(i));
         }
+    }
+
+    /**
+     * 记忆化递归
+     * 每次可选择 1/2两个台阶。
+     * 因此当前情况可由 n-1 和 n-2 两种情况递推得出
+     * */
+    Map<Integer, Integer> memo = new HashMap<>();
+    public int climbStairs(int n) {
+        if (n <= 2){
+            return n;
+        }
+        if (memo.containsKey(n)){
+            return memo.get(n);
+        }
+        int ans = climbStairs(n - 1) + climbStairs(n - 2);
+        memo.put(n, ans);
+        return ans;
     }
 
     /**
@@ -35,7 +58,7 @@ public class ClimbStairs_Easy {
      * 执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户
      * 内存消耗：35.4 MB, 在所有 Java 提交中击败了36.55%的用户
      * */
-    public int climbStairs(int n) {
+    public int climbStairs2(int n) {
         if(n <= 0) return 0;
         int[] counter = new int[n+1];
         counter[0] = 1;
@@ -44,5 +67,21 @@ public class ClimbStairs_Easy {
             counter[i] = counter[i-1] + counter[i-2];
         }
         return counter[n];
+    }
+
+    /**
+     * 动态规划 - 状态压缩
+     * */
+    public int climbStairs3(int n) {
+        if(n <= 2){
+            return n;
+        }
+        int cur = 2, pre = 1;
+        for (int i = 3; i <= n; i++) {
+            int sum = pre + cur;
+            pre = cur;
+            cur = sum;
+        }
+        return cur;
     }
 }

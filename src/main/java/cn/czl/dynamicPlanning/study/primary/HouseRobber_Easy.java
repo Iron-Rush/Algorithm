@@ -63,6 +63,7 @@ public class HouseRobber_Easy {
     }
 
     /**
+     * 动态规划 - 状态压缩
      * 分别记录前一位最大值，和前两位的最大值
      * 通过比较currMax与prevMax + curVal获得当前位置最优解
      * 执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户
