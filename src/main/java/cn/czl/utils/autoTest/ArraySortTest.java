@@ -19,6 +19,10 @@ public class ArraySortTest {
     private static int Start = -10000;
     private static int End = 10000;
 
+    public static void test(String className, String methodName){
+        MethodName = methodName;
+        test(className);
+    }
     public static void test(String className){
         int aCount = 0, bCount = 0, count = 0;
         boolean flag =true;
