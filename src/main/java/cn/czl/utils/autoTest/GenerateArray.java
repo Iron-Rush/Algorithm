@@ -11,7 +11,7 @@ public class GenerateArray {
     static Random random = new Random();
 
     public static int[] generate(int size){
-        return generate(size, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        return generate(size, -100000, 100000);
     }
 
     public static int[] generate(int size, int min, int max){
