@@ -1,4 +1,4 @@
-package cn.czl.list.search;
+package cn.czl.list.search.contains;
 
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +29,8 @@ public class SearchA2DMatrix_Normal {
 
     @Test
     public void TestSolution(){
-        System.out.println(searchMatrix(MATRIX1, 0));   // true
+        System.out.println(searchMatrix(MATRIX1, 24));   // true
+        System.out.println(searchMatrix2(MATRIX1, 24));   // true
     }
 
     /**
@@ -66,15 +67,30 @@ public class SearchA2DMatrix_Normal {
         if(matrix[0][0] > target){
             return false;
         }
-        int yLow = -1, yHigh = matrix.length - 1;
-        while (yLow < yHigh){   // 二分搜索，获取数据所在行
-            int mid = (yHigh - yLow + 1) / 2 + yLow;
-            if(matrix[mid][0] <= target){
-                yLow = mid;
+        int yLow = 0, yHigh = matrix.length - 1;
+        int yRange = matrix.length;
+        while(yLow <=  yHigh){
+            int mid = (yLow + yHigh) >>> 1;
+            if (matrix[mid][0] > target){
+                yHigh = mid-1;
             }else {
-                yHigh = mid - 1;
+                if (mid == yRange-1 || matrix[mid + 1][0] > target){
+                    yLow = mid;
+                    break;
+                }else {
+                    yLow = mid+1;
+                }
             }
         }
+//        int yLow = -1, yHigh = matrix.length - 1;
+//        while (yLow < yHigh){   // 二分搜索，获取数据所在行
+//            int mid = (yHigh - yLow + 1) / 2 + yLow;
+//            if(matrix[mid][0] <= target){
+//                yLow = mid;
+//            }else {
+//                yHigh = mid - 1;
+//            }
+//        }
         int rowIndex = yLow;
         if(rowIndex < 0){
             return false;

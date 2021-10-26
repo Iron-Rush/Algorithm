@@ -4,14 +4,14 @@
 - 每行的第一个整数大于前一行的最后一个整数。
 
 示例 1：
-![SearchA2DMatrix_Normal1](../../../../../resources/list/search/SearchA2DMatrix_Normal1.jpg "SearchA2DMatrix_Normal1")
+![SearchA2DMatrix_Normal1](../../../../../../resources/list/search/SearchA2DMatrix_Normal1.jpg "SearchA2DMatrix_Normal1")
 
 ```
 输入：matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3
 输出：true
 ```
 示例 2：
-![SearchA2DMatrix_Normal2](../../../../../resources/list/search/SearchA2DMatrix_Normal2.jpg "SearchA2DMatrix_Normal2")
+![SearchA2DMatrix_Normal2](../../../../../../resources/list/search/SearchA2DMatrix_Normal2.jpg "SearchA2DMatrix_Normal2")
 
 ```
 输入：matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13
