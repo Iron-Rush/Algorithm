@@ -1,4 +1,4 @@
-package cn.czl.study.dynamicProgramming;
+package cn.czl.dynamicPlanning.study.primary;
 
 import org.junit.jupiter.api.Test;
 
