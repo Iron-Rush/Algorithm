@@ -49,8 +49,10 @@ public class RemoteDeviceDiscovery {
             devicesDiscovered.add(remoteDevice);
 
             try {
-                System.out.println("#发现设备" + remoteDevice.getFriendlyName(false)+"   设备地址："+remoteDevice.getBluetoothAddress());
+                System.out.println("#发现设备：" + remoteDevice.getFriendlyName(false)+"   设备地址："+remoteDevice.getBluetoothAddress());
+                System.out.println(remoteDevice);
             } catch (IOException e) {
+
                 e.printStackTrace();
             }
 
