@@ -111,4 +111,19 @@ public class TransPicName {
         }
         return files;
     }
+
+    @Test
+    public void specialTest(){
+        String path = "D:\\0\\0.zip";
+        String name = "0";
+        File basic = new File(path);
+        String parent = basic.getParentFile().getAbsolutePath();
+        String curName = basic.getName();
+        CopyFile copyFile = new CopyFile();
+        System.out.println(curName);
+        for (int i = 0; i < 20; i++) {
+            String newName = parent+ File.separator + name + i + ".zip";
+            copyFile.copy(path, newName);
+        }
+    }
 }
