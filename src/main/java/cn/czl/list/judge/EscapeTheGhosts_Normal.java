@@ -1,4 +1,4 @@
-package cn.czl.list.operate;
+package cn.czl.list.judge;
 
 import org.junit.jupiter.api.Test;
 
