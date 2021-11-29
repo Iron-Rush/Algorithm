@@ -1,10 +1,9 @@
 package cn.czl.study.search;
 
-import cn.czl.utils.autoTest.GenerateArray;
+import cn.czl.utils.auto.test.GenerateArray;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.Random;
 
 /**
  * @author RedRush

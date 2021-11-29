@@ -1,6 +1,6 @@
 package cn.czl.study.sort;
 
-import cn.czl.utils.autoTest.ArraySortTest;
+import cn.czl.utils.auto.test.ArraySortTest;
 import org.junit.jupiter.api.Test;
 
 /**

@@ -1,4 +1,4 @@
-package cn.czl.utils.autoTest;
+package cn.czl.utils.auto.test;
 
 import java.util.Random;
 

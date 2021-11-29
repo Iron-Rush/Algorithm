@@ -3,10 +3,7 @@ package cn.czl.utils.copy;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author RedRush
@@ -16,9 +13,11 @@ import java.util.Map;
 public class TransPicName {
 
     private String PICHEAD = "";
-    private String ROOT = "D:\\trans\\output\\";       // 文件输出路径
+    private String ROOT = "D:\\trans\\小草\\user\\";       // 文件输出路径
+//    private String ROOT = "D:\\trans\\小草\\";       // 文件输出路径
 //    private String ROOT = "D:\\trans\\docx\\";       // 文件输出路径
-    private String SOURCE = "D:\\Downloads\\pythonDownload\\new\\";     // 文件读取路径
+    private String SOURCE = "D:\\Downloads\\pythonDownload\\upload\\user\\";     // 文件读取路径
+//    private String SOURCE = "D:\\Downloads\\pythonDownload\\小草分类图\\";     // 文件读取路径
 //    private String SOURCE = "G:\\Story\\";     // 文件读取路径
 //    private String SOURCE = "D:\\Downloads\\前女友系列\\";     // 文件读取路径
 
@@ -112,18 +111,31 @@ public class TransPicName {
         return files;
     }
 
+    /**
+     * 删除目录下的空白文件夹
+     * */
     @Test
     public void specialTest(){
-        String path = "D:\\0\\0.zip";
-        String name = "0";
-        File basic = new File(path);
-        String parent = basic.getParentFile().getAbsolutePath();
-        String curName = basic.getName();
-        CopyFile copyFile = new CopyFile();
-        System.out.println(curName);
-        for (int i = 0; i < 20; i++) {
-            String newName = parent+ File.separator + name + i + ".zip";
-            copyFile.copy(path, newName);
+        String path = "D:\\Downloads\\pythonDownload\\upload";
+//        String path = "D:\\Downloads\\";
+//        String path = "G:\\小草";
+        File root = new File(path);
+        if (root.isDirectory()){
+            File[] all = root.listFiles();
+            Deque<File> queue = new LinkedList<>();
+            queue.addAll(Arrays.asList(all));
+            while (!queue.isEmpty()){
+                File file = queue.poll();
+                if (file.isDirectory()){
+                    File[] childs = file.listFiles();
+                    if (childs.length == 0){
+                        System.out.println("delete:" + file.getAbsolutePath());
+                        file.delete();
+                    }else{
+                        queue.addAll(Arrays.asList(childs));
+                    }
+                }
+            }
         }
     }
 }
