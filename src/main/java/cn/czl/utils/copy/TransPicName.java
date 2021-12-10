@@ -13,10 +13,10 @@ import java.util.*;
 public class TransPicName {
 
     private String PICHEAD = "";
-    private String ROOT = "D:\\trans\\小草\\user\\";       // 文件输出路径
+    private String ROOT = "D:\\test\\";       // 文件输出路径
 //    private String ROOT = "D:\\trans\\小草\\";       // 文件输出路径
 //    private String ROOT = "D:\\trans\\docx\\";       // 文件输出路径
-    private String SOURCE = "D:\\Downloads\\pythonDownload\\upload\\user\\";     // 文件读取路径
+    private String SOURCE = "D:\\Downloads\\pythonDownload\\小草分类图\\user\\";     // 文件读取路径
 //    private String SOURCE = "D:\\Downloads\\pythonDownload\\小草分类图\\";     // 文件读取路径
 //    private String SOURCE = "G:\\Story\\";     // 文件读取路径
 //    private String SOURCE = "D:\\Downloads\\前女友系列\\";     // 文件读取路径
@@ -115,8 +115,8 @@ public class TransPicName {
      * 删除目录下的空白文件夹
      * */
     @Test
-    public void specialTest(){
-        String path = "D:\\Downloads\\pythonDownload\\upload";
+    public void delEmptyDir(){
+        String path = "D:\\Downloads\\pythonDownload\\";
 //        String path = "D:\\Downloads\\";
 //        String path = "G:\\小草";
         File root = new File(path);
@@ -128,11 +128,17 @@ public class TransPicName {
                 File file = queue.poll();
                 if (file.isDirectory()){
                     File[] childs = file.listFiles();
+                    if (childs.length < 3) System.out.println(file.getAbsolutePath());
                     if (childs.length == 0){
                         System.out.println("delete:" + file.getAbsolutePath());
                         file.delete();
                     }else{
                         queue.addAll(Arrays.asList(childs));
+                    }
+                }else{
+                    if(file.length() < 5000){
+//                        System.out.println("删除小文件:" + file.getAbsolutePath());
+//                        file.delete();
                     }
                 }
             }

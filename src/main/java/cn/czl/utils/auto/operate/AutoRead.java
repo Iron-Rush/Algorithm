@@ -23,7 +23,25 @@ public class AutoRead {
 
     public static void main(String[] args) {
         AutoRead autoRead = new AutoRead();
-        autoRead.keepReadingToPasteBoard();
+//        autoRead.keepReadingToPasteBoard();
+        autoRead.autoSetPasteBoard();
+    }
+
+    public void autoSetPasteBoard(){
+        try {
+            Thread.sleep( 1000 );
+            for (int i = 0; i < 999999; i++) {
+                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                // 封装文本内容
+                Transferable trans = new StringSelection(String.valueOf(i));
+                // 把文本内容设置到系统剪贴板
+                clipboard.setContents(trans, null);
+                Thread.sleep( 1000 );
+                System.out.println("i:" + i);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void keepReadingToPasteBoard(){

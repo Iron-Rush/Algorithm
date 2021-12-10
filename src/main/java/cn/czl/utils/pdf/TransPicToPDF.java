@@ -18,17 +18,21 @@ import java.util.*;
  */
 public class TransPicToPDF {
 
+    private boolean Key = false;
+    private boolean Rebase = false;
     private String UserKey = "qq654321";
     private String OwnerKey = "Qq654321";
 
-    private String OutPath = "D:\\trans\\pdf\\前女友\\";
-    private String ReadPath = "D:\\Downloads\\pythonDownload\\upload\\写真\\";
-//    private String ReadPath = "G:\\小草\\紧\\";
+//    private String OutPath = "D:\\trans\\pdf\\user\\";
+    private String OutPath = "O:\\阿里云盘\\pdf\\90、00后\\";
+//    private String ReadPath = "D:\\Downloads\\pythonDownload\\upload\\嫩B\\";
+//    private String ReadPath = "D:\\Downloads\\pythonDownload\\upload\\user\\水里的猫\\";
+    private String ReadPath = "G:\\小草\\90、00后\\";
 
     @Test
     public void TransDir(){
-        String dir = "D:\\trans\\前女友系列\\";
-        toPdf(dir, "前女友系列");
+        String dir = "F:\\Download\\Rayna\\";
+        toPdf(dir, "Rayna");
     }
     @Test
     public void autoTrans(){
@@ -39,7 +43,7 @@ public class TransPicToPDF {
             queue.addAll(Arrays.asList(all));
             while (!queue.isEmpty()){
                 File file = queue.poll();
-                if (file.isDirectory() && !file.getName().contains("动图")){
+                if (file.isDirectory()){
                     File[] childs = file.listFiles();
                     for(File c : childs){
                         if (c.isFile()){
@@ -69,6 +73,10 @@ public class TransPicToPDF {
             // PDF文件保存地址
 //            String pdfPath = "d:/test.pdf";
             String pdfPath = OutPath + fileName + ".pdf";
+            if(!Rebase && new File(pdfPath).exists()){
+                System.err.println("跳过生成" + pdfPath);
+                return;
+            }else   System.out.println("===开始生成：" + pdfPath);
             File rootDir = new File(OutPath);
             if(!rootDir.exists()){//如果文件夹不存在
                 rootDir.mkdir();//创建文件夹
@@ -80,7 +88,9 @@ public class TransPicToPDF {
             //doc.open();
             // 写入PDF文档
             PdfWriter writer = PdfWriter.getInstance(doc, fos);
-            writer.setEncryption(UserKey.getBytes(), OwnerKey.getBytes(), PdfWriter.ALLOW_SCREENREADERS, PdfWriter.ENCRYPTION_AES_128);
+            if (Key){
+                writer.setEncryption(UserKey.getBytes(), OwnerKey.getBytes(), PdfWriter.ALLOW_SCREENREADERS, PdfWriter.ENCRYPTION_AES_128);
+            }
             // 读取图片流
             BufferedImage img;
             // 实例化图片
