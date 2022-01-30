@@ -23,9 +23,10 @@ import java.util.List;
  */
 public class TransPDFToPic {
 
-    private static String ReadPath = "D:\\trans\\pdf\\前女友系列\\";
-    private static String OutPath = "D:\\trans\\pdf\\前女友系列\\out\\";
+    private static String ReadPath = "D:\\Downloads\\pythonDownload\\新建文件夹\\";
+    private static String OutPath = "D:\\Downloads\\pythonDownload\\新建文件夹2\\";
     private static String PassWord = "qq654321";
+    private static boolean Rebase = false;
 
     @Test
     public void AutoTransPDF(){
@@ -69,6 +70,8 @@ public class TransPDFToPic {
             if(!outDir.exists()){//如果文件夹不存在
                 System.out.println("创建文件夹：" + out);
                 outDir.mkdirs();//创建文件夹
+            }else if (!Rebase){
+                return;
             }
             for (int pageIndex=0; pageIndex<pageCount; pageIndex++) {
                 String imgPath = out + File.separator + pageIndex+".png";

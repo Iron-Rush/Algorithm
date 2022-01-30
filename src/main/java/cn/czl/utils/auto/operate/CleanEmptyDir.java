@@ -19,7 +19,7 @@ public class CleanEmptyDir {
      * */
     @Test
     public void DelDir(){
-        String path = "D:\\delTest";
+        String path = "D:\\Downloads\\pythonDownload";
         delEmptyDir(path);
     }
 

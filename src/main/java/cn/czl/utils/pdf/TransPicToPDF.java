@@ -1,6 +1,7 @@
 package cn.czl.utils.pdf;
 
 import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.junit.jupiter.api.Test;
 
@@ -23,16 +24,40 @@ public class TransPicToPDF {
     private String UserKey = "qq654321";
     private String OwnerKey = "Qq654321";
 
-//    private String OutPath = "D:\\trans\\pdf\\user\\";
-    private String OutPath = "O:\\阿里云盘\\pdf\\90、00后\\";
-//    private String ReadPath = "D:\\Downloads\\pythonDownload\\upload\\嫩B\\";
-//    private String ReadPath = "D:\\Downloads\\pythonDownload\\upload\\user\\水里的猫\\";
-    private String ReadPath = "G:\\小草\\90、00后\\";
+    private String OutPath = "D:\\trans\\pdf\\";
+//    private String OutPath = "O:\\阿里云盘\\pdf\\90、00后\\";
+    private String ReadPath = "D:\\Downloads\\pythonDownload\\upload\\";
+//    private String ReadPath = "D:\\Downloads\\pythonDownload\\upload\\user\\脚色\\";
+//    private String ReadPath = "G:\\小草\\拳交\\";
 
     @Test
     public void TransDir(){
-        String dir = "F:\\Download\\Rayna\\";
-        toPdf(dir, "Rayna");
+        String dir = "D:\\Downloads\\Picture\\壁纸\\";
+        toPdf(dir, "Test2");
+    }
+    @Test
+    public void autoTransChild(){
+        String root = ReadPath;
+        String out = OutPath;
+        File[] childs = new File(root).listFiles();
+        for(File f : childs){
+            String curFileName = f.getName();
+            if (curFileName.equals("user")){
+                File[] userList = new File(root + "user").listFiles();
+                for(File userFile : userList){
+                    String userFileName = userFile.getName();
+                    OutPath = out + curFileName + File.separator + userFileName + File.separator;
+                    ReadPath = root + curFileName + File.separator + userFileName + File.separator;
+                    autoTrans();
+                }
+                continue;
+            }
+            OutPath = out + curFileName + File.separator;
+            ReadPath = root + curFileName + File.separator;
+//            System.out.println(OutPath);
+//            System.out.println(ReadPath);
+            autoTrans();
+        }
     }
     @Test
     public void autoTrans(){
@@ -114,10 +139,21 @@ public class TransPicToPDF {
                     System.out.println(imagePath);
                     System.err.println("W:" + img.getWidth() + ",H:" + img.getHeight());
                     // 根据图片大小设置文档大小
-                    doc.setPageSize(new Rectangle(img.getWidth(), img
-                            .getHeight()));
+                    doc.setPageSize(new Rectangle(img.getWidth(), img.getHeight()));
+//                    doc.setPageSize(new Rectangle(1240, 1754));//   1240×1754
+//                    doc.setPageSize(new Rectangle(1200, 900));//   1240×1754
+                    //5、创建图片对象,加入headerTable中,此处写入图片路径
                     // 实例化图片h
                     image = Image.getInstance(imagePath);
+//                    image.scaleAbsolute(1240,1754);//自定义大小
+                    // image.scalePercent(50);//缩放百分比 --- 测试不起作用
+//                     image.scaleToFit(1200,900);//自定义大小--自适应
+
+//                    PdfPCell acell = new PdfPCell(image,false);
+//                    headerTable.addCell(acell);
+                    //将主要的表格headerTable加入document文档对象中
+//                    doc.add(headerTable);
+
                     // 添加图片到文档
                     doc.newPage();
                     doc.open();
