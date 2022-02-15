@@ -26,7 +26,7 @@ public class TransPicToPDF {
 
     private String OutPath = "D:\\trans\\pdf\\";
 //    private String OutPath = "O:\\阿里云盘\\pdf\\90、00后\\";
-    private String ReadPath = "D:\\Downloads\\pythonDownload\\upload\\";
+    private String ReadPath = "D:\\Downloads\\pythonDownload\\upload1\\";
 //    private String ReadPath = "D:\\Downloads\\pythonDownload\\upload\\user\\脚色\\";
 //    private String ReadPath = "G:\\小草\\拳交\\";
 
@@ -42,8 +42,8 @@ public class TransPicToPDF {
         File[] childs = new File(root).listFiles();
         for(File f : childs){
             String curFileName = f.getName();
-            if (curFileName.equals("user")){
-                File[] userList = new File(root + "user").listFiles();
+            if (curFileName.equals("user") || curFileName.equals("5zipai")){
+                File[] userList = new File(root + curFileName).listFiles();
                 for(File userFile : userList){
                     String userFileName = userFile.getName();
                     OutPath = out + curFileName + File.separator + userFileName + File.separator;
@@ -135,7 +135,7 @@ public class TransPicToPDF {
                     // 读取图片流
                     img = ImageIO.read(new File(imagePath));
 //                    System.err.println("宽度" + img.getWidth());
-//                    System.err.println("高度" + img.getHeight());
+//                    System.err.println("高度" + img.getHeight());g
                     System.out.println(imagePath);
                     System.err.println("W:" + img.getWidth() + ",H:" + img.getHeight());
                     // 根据图片大小设置文档大小

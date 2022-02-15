@@ -13,10 +13,11 @@ import java.util.*;
 public class TransPicName {
 
     private String PICHEAD = "";
-    private String ROOT = "D:\\test\\";       // 文件输出路径
+    private String ROOT = "D:\\trans\\European Beaties\\";       // 文件输出路径
 //    private String ROOT = "D:\\trans\\小草\\";       // 文件输出路径
 //    private String ROOT = "D:\\trans\\docx\\";       // 文件输出路径
-    private String SOURCE = "D:\\Downloads\\pythonDownload\\小草分类图\\user\\";     // 文件读取路径
+//    private String SOURCE = "D:\\Downloads\\pythonDownload\\小草分类图\\user\\";     // 文件读取路径
+    private String SOURCE = "D:\\Downloads\\迅雷下载\\eMuleDownload\\European Beaties\\";     // 文件读取路径
 //    private String SOURCE = "D:\\Downloads\\pythonDownload\\小草分类图\\";     // 文件读取路径
 //    private String SOURCE = "G:\\Story\\";     // 文件读取路径
 //    private String SOURCE = "D:\\Downloads\\前女友系列\\";     // 文件读取路径
