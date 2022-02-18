@@ -20,6 +20,7 @@ public class CleanEmptyDir {
     @Test
     public void DelDir(){
         String path = "D:\\Downloads\\pythonDownload";
+        deleteAllSmallFile(path, 2000);
         delEmptyDir(path);
     }
 
@@ -72,6 +73,20 @@ public class CleanEmptyDir {
             System.out.println(file.getParent());
             System.out.println(toFile.getName());
             file.renameTo(toFile);
+        }
+    }
+    /**
+     * 删除目录下全部小文件
+     * */
+    public static void deleteAllSmallFile(String path, int size){
+        File root = new File(path);
+        Deque<File> files = getAllFile(root);
+        while (!files.isEmpty()){
+            File file = files.poll();
+            if(file.length() < size){
+                System.out.println("删除小文件:" + file.getAbsolutePath());
+                file.delete();
+            }
         }
     }
     /**
